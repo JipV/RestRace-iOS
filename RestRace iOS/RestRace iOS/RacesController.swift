@@ -13,7 +13,7 @@ class RacesController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let restRace: String = "https://restrace2.herokuapp.com/"
-    let authKey: String = "c53cf930-3829-4ed0-808a-b54d80cbcdde"
+    let authKey: String = NSUserDefaults.standardUserDefaults().stringForKey("authKey")!
     
     var racesData: [Race] = []
     
@@ -22,18 +22,22 @@ class RacesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.performSegueWithIdentifier("toLogin", sender: self)
-        
+        //if (self.authKey.isEmpty) {
+            self.performSegueWithIdentifier("toLogin", sender: self)
+        //}
         
         activityIndicator.frame = CGRectMake(100, 100, 100, 100);
         self.view.addSubview(activityIndicator)
         
-        getRacesData()
-        
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        var nib = UINib(nibName: "RaceCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "raceCell")
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        /*var user: String? = "Ja"
+        if (user == nil) {
+            self.performSegueWithIdentifier("toLogin", sender: self)
+        }*/
+        getRacesData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,21 +45,23 @@ class RacesController: UIViewController {
     }
     
     func getRacesData() {
-        activityIndicator.startAnimating()
+        if (!self.authKey.isEmpty) {
+            activityIndicator.startAnimating()
         
-        let url = NSURL(string: "\(restRace)races?apikey=\(authKey)&type=participating")!
-        var request = NSMutableURLRequest(URL: url)
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
+            let url = NSURL(string: "\(restRace)races?apikey=\(self.authKey)&type=participating")!
+            var request = NSMutableURLRequest(URL: url)
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-            (response, data, error) in
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+                (response, data, error) in
             
-            var parseError: NSError?
-            let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
-                options: NSJSONReadingOptions.AllowFragments,
-                error:&parseError)
+                var parseError: NSError?
+                let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
+                    options: NSJSONReadingOptions.AllowFragments,
+                    error:&parseError)
             
-            self.getRacesDataFromJSON(parsedObject as NSArray)
+                self.getRacesDataFromJSON(parsedObject as NSArray)
+            }
         }
     }
     
@@ -117,11 +123,6 @@ class RacesController: UIViewController {
         return 55.0
     }
     
-    /*func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.performSegueWithIdentifier("toChat", sender: tableView.cellForRowAtIndexPath(indexPath))
-    }*/
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var raceCell: RaceCell = self.tableView.dequeueReusableCellWithIdentifier("raceCell") as RaceCell
         raceCell.naam.text = self.racesData[indexPath.row].name
@@ -129,7 +130,16 @@ class RacesController: UIViewController {
         return raceCell
     }
     
-
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "toRace") {
+            let indexPath = self.tableView.indexPathForSelectedRow()
+            let race: Race = racesData[indexPath!.row]
+            let raceController = segue.destinationViewController as RaceController
+            raceController.race = race
+            raceController.hidesBottomBarWhenPushed = true;
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

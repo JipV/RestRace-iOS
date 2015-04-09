@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>77C75F49-980C-47CF-B827-D9DA29139049</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RestRace iOS</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C7B87717D33B1D852B2F7B5DDA594D1E72E3D589</key>
+		<string>https://github.com/JipV/RestRace-iOS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RestRace iOS/RestRace iOS.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C7B87717D33B1D852B2F7B5DDA594D1E72E3D589</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/JipV/RestRace-iOS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C7B87717D33B1D852B2F7B5DDA594D1E72E3D589</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C7B87717D33B1D852B2F7B5DDA594D1E72E3D589</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RestRace-iOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -10,16 +10,19 @@
 		CE00F9771AD164C4001736A6 /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00F9761AD164C3001736A6 /* Race.swift */; };
 		CE00F97B1AD2741A001736A6 /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00F97A1AD2741A001736A6 /* Waypoint.swift */; };
 		CE0984B81AD2C93E002D9DF0 /* ProfielController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0984B71AD2C93E002D9DF0 /* ProfielController.swift */; };
+		CE1BB0DF1AD6A67100FACA4D /* RaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BB0DE1AD6A67000FACA4D /* RaceController.swift */; };
 		CE37F4431ACEC0130082DA09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37F4421ACEC0130082DA09 /* AppDelegate.swift */; };
-		CE37F4451ACEC0130082DA09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37F4441ACEC0130082DA09 /* ViewController.swift */; };
 		CE37F4481ACEC0130082DA09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE37F4461ACEC0130082DA09 /* Main.storyboard */; };
 		CE37F44A1ACEC0130082DA09 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE37F4491ACEC0130082DA09 /* Images.xcassets */; };
 		CE37F44D1ACEC0130082DA09 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE37F44B1ACEC0130082DA09 /* LaunchScreen.xib */; };
 		CE37F4591ACEC0130082DA09 /* RestRace_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37F4581ACEC0130082DA09 /* RestRace_iOSTests.swift */; };
 		CE37F4631ACEE5A30082DA09 /* RacesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37F4621ACEE5A30082DA09 /* RacesController.swift */; };
+		CE4789981AD5A564002E8B22 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4789971AD5A564002E8B22 /* User.swift */; };
+		CE4B5E5E1AD44AA4000C1CA3 /* RegistrerenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B5E5D1AD44AA4000C1CA3 /* RegistrerenController.swift */; };
+		CE4B5E601AD4546A000C1CA3 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B5E5F1AD4546A000C1CA3 /* SettingsController.swift */; };
 		CE77E7FC1AD312B20048D1AF /* InloggenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77E7FB1AD312B20048D1AF /* InloggenController.swift */; };
-		CE835FA51AD0122A00B23F95 /* RaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE835FA41AD0122A00B23F95 /* RaceCell.xib */; };
 		CE835FA71AD01CE000B23F95 /* RaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE835FA61AD01CE000B23F95 /* RaceCell.swift */; };
+		CE9407FE1AD6FAC300E5299A /* WaypointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9407FD1AD6FAC300E5299A /* WaypointCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,10 +39,10 @@
 		CE00F9761AD164C3001736A6 /* Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
 		CE00F97A1AD2741A001736A6 /* Waypoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
 		CE0984B71AD2C93E002D9DF0 /* ProfielController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfielController.swift; sourceTree = "<group>"; };
+		CE1BB0DE1AD6A67000FACA4D /* RaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceController.swift; sourceTree = "<group>"; };
 		CE37F43D1ACEC0130082DA09 /* RestRace iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RestRace iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE37F4411ACEC0130082DA09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE37F4421ACEC0130082DA09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE37F4441ACEC0130082DA09 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CE37F4471ACEC0130082DA09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE37F4491ACEC0130082DA09 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE37F44C1ACEC0130082DA09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -47,9 +50,12 @@
 		CE37F4571ACEC0130082DA09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE37F4581ACEC0130082DA09 /* RestRace_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestRace_iOSTests.swift; sourceTree = "<group>"; };
 		CE37F4621ACEE5A30082DA09 /* RacesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RacesController.swift; sourceTree = "<group>"; };
+		CE4789971AD5A564002E8B22 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CE4B5E5D1AD44AA4000C1CA3 /* RegistrerenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrerenController.swift; sourceTree = "<group>"; };
+		CE4B5E5F1AD4546A000C1CA3 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		CE77E7FB1AD312B20048D1AF /* InloggenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InloggenController.swift; sourceTree = "<group>"; };
-		CE835FA41AD0122A00B23F95 /* RaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RaceCell.xib; sourceTree = "<group>"; };
 		CE835FA61AD01CE000B23F95 /* RaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceCell.swift; sourceTree = "<group>"; };
+		CE9407FD1AD6FAC300E5299A /* WaypointCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,18 +98,21 @@
 			isa = PBXGroup;
 			children = (
 				CE37F4421ACEC0130082DA09 /* AppDelegate.swift */,
-				CE37F4441ACEC0130082DA09 /* ViewController.swift */,
 				CE37F4461ACEC0130082DA09 /* Main.storyboard */,
 				CE37F4491ACEC0130082DA09 /* Images.xcassets */,
 				CE37F44B1ACEC0130082DA09 /* LaunchScreen.xib */,
 				CE37F4401ACEC0130082DA09 /* Supporting Files */,
 				CE37F4621ACEE5A30082DA09 /* RacesController.swift */,
-				CE835FA41AD0122A00B23F95 /* RaceCell.xib */,
 				CE835FA61AD01CE000B23F95 /* RaceCell.swift */,
 				CE00F9761AD164C3001736A6 /* Race.swift */,
 				CE00F97A1AD2741A001736A6 /* Waypoint.swift */,
 				CE0984B71AD2C93E002D9DF0 /* ProfielController.swift */,
 				CE77E7FB1AD312B20048D1AF /* InloggenController.swift */,
+				CE4B5E5D1AD44AA4000C1CA3 /* RegistrerenController.swift */,
+				CE4B5E5F1AD4546A000C1CA3 /* SettingsController.swift */,
+				CE4789971AD5A564002E8B22 /* User.swift */,
+				CE1BB0DE1AD6A67000FACA4D /* RaceController.swift */,
+				CE9407FD1AD6FAC300E5299A /* WaypointCell.swift */,
 			);
 			path = "RestRace iOS";
 			sourceTree = "<group>";
@@ -213,7 +222,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE835FA51AD0122A00B23F95 /* RaceCell.xib in Resources */,
 				CE37F4481ACEC0130082DA09 /* Main.storyboard in Resources */,
 				CE37F44D1ACEC0130082DA09 /* LaunchScreen.xib in Resources */,
 				CE37F44A1ACEC0130082DA09 /* Images.xcassets in Resources */,
@@ -234,14 +242,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE9407FE1AD6FAC300E5299A /* WaypointCell.swift in Sources */,
 				CE835FA71AD01CE000B23F95 /* RaceCell.swift in Sources */,
-				CE37F4451ACEC0130082DA09 /* ViewController.swift in Sources */,
+				CE1BB0DF1AD6A67100FACA4D /* RaceController.swift in Sources */,
 				CE77E7FC1AD312B20048D1AF /* InloggenController.swift in Sources */,
 				CE0984B81AD2C93E002D9DF0 /* ProfielController.swift in Sources */,
 				CE00F97B1AD2741A001736A6 /* Waypoint.swift in Sources */,
 				CE37F4431ACEC0130082DA09 /* AppDelegate.swift in Sources */,
+				CE4B5E601AD4546A000C1CA3 /* SettingsController.swift in Sources */,
 				CE37F4631ACEE5A30082DA09 /* RacesController.swift in Sources */,
+				CE4B5E5E1AD44AA4000C1CA3 /* RegistrerenController.swift in Sources */,
 				CE00F9771AD164C4001736A6 /* Race.swift in Sources */,
+				CE4789981AD5A564002E8B22 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

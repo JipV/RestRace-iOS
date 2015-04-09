@@ -1,16 +1,16 @@
 //
-//  InloggenController.swift
+//  RegistrerenController.swift
 //  RestRace iOS
 //
-//  Created by User on 06/04/15.
+//  Created by User on 07/04/15.
 //  Copyright (c) 2015 User. All rights reserved.
 //
 
 import UIKit
 
-class InloggenController: UIViewController {
+class RegistrerenController: UIViewController {
 
-    let restRace: String = "https://restrace2.herokuapp.com/"    
+    let restRace: String = "https://restrace2.herokuapp.com/"
     
     @IBOutlet weak var emailadresTextField: UITextField!
     @IBOutlet weak var wachtwoordTextField: UITextField!
@@ -23,9 +23,9 @@ class InloggenController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func inloggen(sender: UIButton) {
+    @IBAction func registreren(sender: UIButton) {
         if (!emailadresTextField.text.isEmpty && !wachtwoordTextField.text.isEmpty) {
-            let url = NSURL(string: "\(restRace)login")!
+            let url = NSURL(string: "\(restRace)signup")!
             var request = NSMutableURLRequest(URL: url)
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -61,12 +61,12 @@ class InloggenController: UIViewController {
             defaults.setObject(user["nickname"] as? String, forKey: "nickname")
             defaults.setObject(visitedWaypointsArray, forKey: "visitedWaypoints")
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            println("Goede registratie")
         }
         else {
             wachtwoordTextField.text = ""
-
-            var refreshAlert = UIAlertController(title: "Mislukt", message: "Het inloggen is mislukt.\nProbeer het opnieuw.", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            var refreshAlert = UIAlertController(title: "Mislukt", message: "Het registreren is mislukt.\nProbeer het opnieuw.", preferredStyle: UIAlertControllerStyle.Alert)
             refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
             presentViewController(refreshAlert, animated: true, completion: nil)
         }

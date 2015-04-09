@@ -1,14 +1,14 @@
 //
-//  ProfielController.swift
+//  SettingsController.swift
 //  RestRace iOS
 //
-//  Created by User on 06/04/15.
+//  Created by User on 07/04/15.
 //  Copyright (c) 2015 User. All rights reserved.
 //
 
 import UIKit
 
-class ProfielController: UIViewController {
+class SettingsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,10 +16,6 @@ class ProfielController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    @IBAction func onTapMainView(sender: UITapGestureRecognizer) {
-        self.view.endEditing(true)
     }
     
     /*
