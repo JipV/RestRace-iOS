@@ -143,6 +143,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="rMF-TS-6IJ" kind="show" id="9HF-XT-jex"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="blT-Ot-Uqu">
@@ -331,6 +334,85 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yke-8c-6Ns" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-79" y="-708"/>
+        </scene>
+        <!--Deelnemen-->
+        <scene sceneID="Ux4-NK-Y0c">
+            <objects>
+                <viewController id="rMF-TS-6IJ" customClass="DeelnemenController" customModule="RestRace_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GrO-Bi-cAK"/>
+                        <viewControllerLayoutGuide type="bottom" id="TmW-vu-kO5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MEI-qk-6da">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdP-mQ-4Tc">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VTS-Hc-PzF">
+                                        <rect key="frame" x="8" y="49" width="584" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rIG-br-yrg">
+                                        <rect key="frame" x="8" y="87" width="584" height="41"/>
+                                        <color key="backgroundColor" red="0.0" green="0.73725490199999999" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="41" id="xqI-1S-4AO"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="Deelnemen">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="deelnemenAanRace:" destination="rMF-TS-6IJ" eventType="touchUpInside" id="C9g-l4-v3f"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Code:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gh-Cp-Tai">
+                                        <rect key="frame" x="13" y="20" width="47" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="rIG-br-yrg" firstAttribute="top" secondItem="VTS-Hc-PzF" secondAttribute="bottom" constant="8" symbolic="YES" id="1BX-97-u21"/>
+                                    <constraint firstItem="1gh-Cp-Tai" firstAttribute="leading" secondItem="xdP-mQ-4Tc" secondAttribute="leading" constant="13" id="1oP-Kb-b3e"/>
+                                    <constraint firstItem="rIG-br-yrg" firstAttribute="leading" secondItem="xdP-mQ-4Tc" secondAttribute="leadingMargin" id="DE5-tz-dBi"/>
+                                    <constraint firstItem="1gh-Cp-Tai" firstAttribute="top" secondItem="xdP-mQ-4Tc" secondAttribute="top" constant="20" id="FQG-Yg-OT6"/>
+                                    <constraint firstAttribute="bottom" secondItem="rIG-br-yrg" secondAttribute="bottom" constant="472" id="I0d-u8-Twi"/>
+                                    <constraint firstItem="rIG-br-yrg" firstAttribute="leading" secondItem="VTS-Hc-PzF" secondAttribute="leading" id="RDE-f7-nMC"/>
+                                    <constraint firstItem="VTS-Hc-PzF" firstAttribute="trailing" secondItem="xdP-mQ-4Tc" secondAttribute="trailingMargin" id="S3M-Jg-M6j"/>
+                                    <constraint firstItem="VTS-Hc-PzF" firstAttribute="top" secondItem="1gh-Cp-Tai" secondAttribute="bottom" constant="8" symbolic="YES" id="U31-nh-rfi"/>
+                                    <constraint firstItem="VTS-Hc-PzF" firstAttribute="trailing" secondItem="rIG-br-yrg" secondAttribute="trailing" id="ffx-Oo-HXa"/>
+                                    <constraint firstItem="rIG-br-yrg" firstAttribute="centerX" secondItem="xdP-mQ-4Tc" secondAttribute="centerX" id="z58-rp-eNb"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xdP-mQ-4Tc" secondAttribute="trailing" id="EVF-fq-GG8"/>
+                            <constraint firstItem="xdP-mQ-4Tc" firstAttribute="top" secondItem="MEI-qk-6da" secondAttribute="top" id="XOD-Ho-wUI"/>
+                            <constraint firstItem="xdP-mQ-4Tc" firstAttribute="leading" secondItem="MEI-qk-6da" secondAttribute="leading" id="kUV-Ch-x0J"/>
+                            <constraint firstItem="xdP-mQ-4Tc" firstAttribute="bottom" secondItem="TmW-vu-kO5" secondAttribute="top" id="ygJ-SL-FF0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Deelnemen" id="FOL-gU-dFP"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="codeTextField" destination="VTS-Hc-PzF" id="s0B-GB-dcw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dwr-nj-Hml" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-79" y="78"/>
         </scene>
         <!--Inloggen-->
         <scene sceneID="mer-aF-Jzr">

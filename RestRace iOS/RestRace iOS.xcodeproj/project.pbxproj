@@ -23,6 +23,7 @@
 		CE835FA71AD01CE000B23F95 /* RaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE835FA61AD01CE000B23F95 /* RaceCell.swift */; };
 		CE9407FE1AD6FAC300E5299A /* WaypointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9407FD1AD6FAC300E5299A /* WaypointCell.swift */; };
 		EC3E364A1AD7C8B3004B98C6 /* WaypointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3E36491AD7C8B3004B98C6 /* WaypointController.swift */; };
+		ECE2B0B71AD80C8600039BF0 /* DeelnemenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2B0B61AD80C8600039BF0 /* DeelnemenController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		CE835FA61AD01CE000B23F95 /* RaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceCell.swift; sourceTree = "<group>"; };
 		CE9407FD1AD6FAC300E5299A /* WaypointCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointCell.swift; sourceTree = "<group>"; };
 		EC3E36491AD7C8B3004B98C6 /* WaypointController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointController.swift; sourceTree = "<group>"; };
+		ECE2B0B61AD80C8600039BF0 /* DeelnemenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeelnemenController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				CE1BB0DE1AD6A67000FACA4D /* RaceController.swift */,
 				CE9407FD1AD6FAC300E5299A /* WaypointCell.swift */,
 				EC3E36491AD7C8B3004B98C6 /* WaypointController.swift */,
+				ECE2B0B61AD80C8600039BF0 /* DeelnemenController.swift */,
 			);
 			path = "RestRace iOS";
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				EC3E364A1AD7C8B3004B98C6 /* WaypointController.swift in Sources */,
 				CE4B5E5E1AD44AA4000C1CA3 /* RegistrerenController.swift in Sources */,
 				CE00F9771AD164C4001736A6 /* Race.swift in Sources */,
+				ECE2B0B71AD80C8600039BF0 /* DeelnemenController.swift in Sources */,
 				CE4789981AD5A564002E8B22 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
