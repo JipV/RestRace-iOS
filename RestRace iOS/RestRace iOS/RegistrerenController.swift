@@ -11,6 +11,7 @@ import UIKit
 class RegistrerenController: UIViewController {
 
     let restRace: String = "https://restrace2.herokuapp.com/"
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     @IBOutlet weak var emailadresTextField: UITextField!
     @IBOutlet weak var wachtwoordTextField: UITextField!
@@ -43,7 +44,7 @@ class RegistrerenController: UIViewController {
                     options: NSJSONReadingOptions.AllowFragments,
                     error:&parseError)
             
-                self.getUserFromJSON(parsedObject as NSDictionary)
+                self.getUserFromJSON(parsedObject as! NSDictionary)
             }
         }
     }
@@ -51,17 +52,16 @@ class RegistrerenController: UIViewController {
     func getUserFromJSON(user: NSDictionary) {
         if (user["authKey"] as? String != nil) {
             var visitedWaypointsArray: [String] = []
-            for visitedWaypoint in user["visitedLocations"] as NSArray {
-                let waypoint = visitedWaypoint as NSDictionary
-                visitedWaypointsArray.append(visitedWaypoint["location"] as String)
+            for visitedWaypoint in user["visitedLocations"] as! NSArray {
+                let waypoint = visitedWaypoint as! NSDictionary
+                visitedWaypointsArray.append(visitedWaypoint["location"] as! String)
             }
             
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(user["authKey"] as String, forKey: "authKey")
+            defaults.setObject(user["authKey"] as! String, forKey: "authKey")
             defaults.setObject(user["nickname"] as? String, forKey: "nickname")
             defaults.setObject(visitedWaypointsArray, forKey: "visitedWaypoints")
             
-            println("Goede registratie")
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
         else {
             wachtwoordTextField.text = ""

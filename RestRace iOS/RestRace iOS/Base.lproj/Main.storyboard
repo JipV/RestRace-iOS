@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6yb-Qm-Id8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6yb-Qm-Id8">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -19,7 +19,6 @@
                     <connections>
                         <segue destination="xwR-bF-j00" kind="relationship" relationship="viewControllers" id="ntU-pP-pPQ"/>
                         <segue destination="2N0-hu-Jlz" kind="relationship" relationship="viewControllers" id="MOL-xR-mNt"/>
-                        <segue destination="Gs0-pA-Upr" kind="relationship" relationship="viewControllers" id="oga-gf-32Y"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RgA-Sn-KU6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -34,6 +33,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2sl-ee-1JT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.18823529410000001" green="0.2470588235" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -92,7 +92,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Naam" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0t-A3-dhu">
                                                     <rect key="frame" x="8" y="8" width="559" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aantal waypoints" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGN-0b-9aW">
@@ -128,10 +128,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="l6y-Gn-KTr" secondAttribute="trailing" id="46E-Dg-D5Y"/>
-                            <constraint firstAttribute="bottom" secondItem="l6y-Gn-KTr" secondAttribute="bottom" id="dle-xo-Lhb"/>
-                            <constraint firstItem="l6y-Gn-KTr" firstAttribute="leading" secondItem="N9E-V8-CTx" secondAttribute="leading" id="kuE-DL-fEZ"/>
-                            <constraint firstItem="l6y-Gn-KTr" firstAttribute="top" secondItem="N9E-V8-CTx" secondAttribute="top" id="rSZ-Zy-83X"/>
+                            <constraint firstItem="l6y-Gn-KTr" firstAttribute="top" secondItem="N9E-V8-CTx" secondAttribute="top" id="B1v-9I-kyG"/>
+                            <constraint firstAttribute="bottom" secondItem="l6y-Gn-KTr" secondAttribute="bottom" id="Bzr-gQ-GSq"/>
+                            <constraint firstAttribute="trailing" secondItem="l6y-Gn-KTr" secondAttribute="trailing" id="gAS-jk-ViE"/>
+                            <constraint firstItem="l6y-Gn-KTr" firstAttribute="leading" secondItem="N9E-V8-CTx" secondAttribute="leading" id="h99-cf-m1k"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Races" id="ZgX-7j-yHi">
@@ -140,6 +140,7 @@
                                 <rect key="frame" x="16" y="7" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Deelnemen">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -149,8 +150,12 @@
                                 <rect key="frame" x="451" y="7" width="75" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Uitloggen">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="uitloggen:" destination="Kjq-1d-e2M" eventType="touchUpInside" id="G5C-6g-UvW"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -213,31 +218,31 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Naam" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wJ-eW-Ama">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Naam" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wJ-eW-Ama">
                                 <rect key="frame" x="16" y="20" width="568" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="qWY-lf-mAA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="NBd-ov-pqN">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="NBd-ov-pqN">
                                 <rect key="frame" x="0.0" y="130" width="599" height="413"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="waypointCell" rowHeight="55" id="xB5-b4-YC1" customClass="WaypointCell" customModule="RestRace_iOS" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="waypointCell" rowHeight="55" id="xB5-b4-YC1" customClass="WaypointCell" customModule="RestRace_iOS" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xB5-b4-YC1" id="qjI-kY-16X">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Naam" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65m-1F-Gd7">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Naam" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65m-1F-Gd7">
                                                     <rect key="frame" x="8" y="8" width="583" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aantal deelnemers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dK-Kg-f5A">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Aantal deelnemers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dK-Kg-f5A">
                                                     <rect key="frame" x="8" y="25" width="583" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -258,6 +263,7 @@
                                         <connections>
                                             <outlet property="aantalDeelnemers" destination="7dK-Kg-f5A" id="j2Y-qB-Fiy"/>
                                             <outlet property="naam" destination="65m-1F-Gd7" id="pMd-72-qsN"/>
+                                            <segue destination="Gbv-7l-TcJ" kind="show" identifier="toWaypoint" id="EYl-gw-uOn"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -266,22 +272,22 @@
                                     <outlet property="delegate" destination="9S8-qG-rGX" id="anu-ha-nsp"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starttijd" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhY-gj-TyC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Starttijd" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhY-gj-TyC">
                                 <rect key="frame" x="16" y="50" width="568" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waypoints:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWk-rk-eCl">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Waypoints:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWk-rk-eCl">
                                 <rect key="frame" x="16" y="93" width="599" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="J2U-Pj-iI0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eindtijd" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ie-TO-GHO">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Eindtijd" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ie-TO-GHO">
                                 <rect key="frame" x="16" y="50" width="568" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -344,7 +350,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mailadres:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7S-bi-o9P">
                                         <rect key="frame" x="8" y="8" width="96" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ub5-KS-IlX">
@@ -375,7 +381,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wachtwoord:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8K-39-tdi">
                                         <rect key="frame" x="8" y="75" width="102" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIX-TX-4RO">
@@ -453,6 +459,67 @@
             </objects>
             <point key="canvasLocation" x="715" y="-1436"/>
         </scene>
+        <!--Waypoint-->
+        <scene sceneID="q9J-CH-8Hs">
+            <objects>
+                <viewController id="Gbv-7l-TcJ" customClass="WaypointController" customModule="RestRace_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="g8j-Wm-18N"/>
+                        <viewControllerLayoutGuide type="bottom" id="Kn0-dr-dFg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YMy-4t-RZn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sXL-kO-lhS">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Naam" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYg-sA-Hfo">
+                                        <rect key="frame" x="8" y="20" width="577" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="j2E-pw-phB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Omschrijving" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="je5-FZ-1f5">
+                                        <rect key="frame" x="8" y="49" width="584" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="qYg-sA-Hfo" firstAttribute="leading" secondItem="sXL-kO-lhS" secondAttribute="leadingMargin" id="44h-jA-qTF"/>
+                                    <constraint firstAttribute="trailing" secondItem="qYg-sA-Hfo" secondAttribute="trailing" constant="15" id="87v-69-YtE"/>
+                                    <constraint firstItem="je5-FZ-1f5" firstAttribute="centerX" secondItem="sXL-kO-lhS" secondAttribute="centerX" id="GxI-fO-fyg"/>
+                                    <constraint firstItem="je5-FZ-1f5" firstAttribute="trailing" secondItem="sXL-kO-lhS" secondAttribute="trailingMargin" id="Him-Ez-WaE"/>
+                                    <constraint firstItem="je5-FZ-1f5" firstAttribute="top" secondItem="qYg-sA-Hfo" secondAttribute="bottom" constant="8" symbolic="YES" id="UTJ-sh-KCq"/>
+                                    <constraint firstAttribute="bottom" secondItem="je5-FZ-1f5" secondAttribute="bottom" constant="530" id="WRl-P7-wec"/>
+                                    <constraint firstItem="je5-FZ-1f5" firstAttribute="leading" secondItem="qYg-sA-Hfo" secondAttribute="leading" id="Xyd-Gi-L6G"/>
+                                    <constraint firstItem="qYg-sA-Hfo" firstAttribute="top" secondItem="sXL-kO-lhS" secondAttribute="top" constant="20" id="yLh-O8-vu1"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="sXL-kO-lhS" secondAttribute="trailing" id="8dM-JI-doD"/>
+                            <constraint firstItem="sXL-kO-lhS" firstAttribute="top" secondItem="YMy-4t-RZn" secondAttribute="top" id="PVN-bs-HNo"/>
+                            <constraint firstItem="sXL-kO-lhS" firstAttribute="bottom" secondItem="Kn0-dr-dFg" secondAttribute="top" id="jac-Oj-qZu"/>
+                            <constraint firstItem="sXL-kO-lhS" firstAttribute="leading" secondItem="YMy-4t-RZn" secondAttribute="leading" id="vT2-Kd-KR3"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Waypoint" id="eE9-hA-byu"/>
+                    <connections>
+                        <outlet property="naamLabel" destination="qYg-sA-Hfo" id="dz5-Nu-Ntv"/>
+                        <outlet property="omschrijvingLabel" destination="je5-FZ-1f5" id="F3c-cl-Elc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dCb-pU-vzT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="715" y="-708"/>
+        </scene>
         <!--Registreren-->
         <scene sceneID="ti6-SB-XlX">
             <objects>
@@ -471,7 +538,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mailadres:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGp-wB-f5f">
                                         <rect key="frame" x="8" y="8" width="96" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3uo-KB-pVI">
@@ -482,7 +549,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wachtwoord:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdx-qC-r0W">
                                         <rect key="frame" x="8" y="75" width="102" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQa-LV-lBS">
@@ -555,7 +622,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1517" y="-1436"/>
+            <point key="canvasLocation" x="1497" y="-1436"/>
         </scene>
         <!--Profiel-->
         <scene sceneID="LqV-fE-qHI">
@@ -575,7 +642,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHM-eC-Qbf">
                                         <rect key="frame" x="8" y="8" width="82" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l2c-W2-k1c">
@@ -633,6 +700,7 @@
                                 <rect key="frame" x="451" y="7" width="75" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Uitloggen">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -647,56 +715,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-999" y="78"/>
-        </scene>
-        <!--Settings-->
-        <scene sceneID="UqM-SU-mXX">
-            <objects>
-                <viewController title="Settings" id="bcq-Az-z2W" customClass="SettingsController" customModule="RestRace_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="kD1-v5-TWK"/>
-                        <viewControllerLayoutGuide type="bottom" id="s52-Af-jIo"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="t6k-c3-Vo8">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Settings" id="Ya7-gh-sjR">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="BRh-lb-nkk">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ccp-2R-bCj">
-                                <rect key="frame" x="451" y="7" width="75" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Uitloggen">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X8c-Hv-NqD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-999" y="878"/>
-        </scene>
-        <!--Settings-->
-        <scene sceneID="j46-vr-jqg">
-            <objects>
-                <navigationController title="Settings" id="Gs0-pA-Upr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="4j6-IF-xZb"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IAP-Ku-Hua">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.18823529410000001" green="0.2470588235" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="bcq-Az-z2W" kind="relationship" relationship="rootViewController" id="mMf-eB-IcC"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="l7x-WA-iAu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1807" y="878"/>
         </scene>
     </scenes>
 </document>

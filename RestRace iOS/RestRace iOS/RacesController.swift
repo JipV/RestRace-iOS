@@ -13,7 +13,7 @@ class RacesController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let restRace: String = "https://restrace2.herokuapp.com/"
-    let authKey: String = NSUserDefaults.standardUserDefaults().stringForKey("authKey")!
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     var racesData: [Race] = []
     
@@ -22,9 +22,10 @@ class RacesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //if (self.authKey.isEmpty) {
+        let authKey: String? = defaults.stringForKey("authKey")
+        if (authKey == nil) {
             self.performSegueWithIdentifier("toLogin", sender: self)
-        //}
+        }
         
         activityIndicator.frame = CGRectMake(100, 100, 100, 100);
         self.view.addSubview(activityIndicator)
@@ -33,10 +34,8 @@ class RacesController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        /*var user: String? = "Ja"
-        if (user == nil) {
-            self.performSegueWithIdentifier("toLogin", sender: self)
-        }*/
+        self.racesData = []
+        refreshTableView()
         getRacesData()
     }
 
@@ -44,11 +43,24 @@ class RacesController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func getRacesData() {
-        if (!self.authKey.isEmpty) {
-            activityIndicator.startAnimating()
+    @IBAction func uitloggen(sender: UIButton) {
+        self.racesData = []
+        refreshTableView()
         
-            let url = NSURL(string: "\(restRace)races?apikey=\(self.authKey)&type=participating")!
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(nil, forKey: "authKey")
+        defaults.setObject(nil, forKey: "nickname")
+        defaults.setObject(nil, forKey: "visitedWaypoints")
+        
+        self.performSegueWithIdentifier("toLogin", sender: self)
+    }
+    
+    func getRacesData() {
+        let authKey: String? = defaults.stringForKey("authKey")
+        if (authKey != nil) {
+            activityIndicator.startAnimating()
+            
+            let url = NSURL(string: "\(self.restRace)races?apikey=\(authKey!)&type=participant&pageSize=100")!
             var request = NSMutableURLRequest(URL: url)
             request.addValue("application/json", forHTTPHeaderField: "Accept")
         
@@ -60,43 +72,35 @@ class RacesController: UIViewController {
                     options: NSJSONReadingOptions.AllowFragments,
                     error:&parseError)
             
-                self.getRacesDataFromJSON(parsedObject as NSArray)
+                self.getRacesDataFromJSON(parsedObject as! NSArray)
             }
         }
     }
     
     func getRacesDataFromJSON(races: NSArray) {
         for race in races {
-                
+            
             var ownersArray: [String] = []
-            for owner in race["owners"] as NSArray {
-                ownersArray.append(owner["_id"] as NSString)
+            for owner in race["owners"] as! NSArray {
+                ownersArray.append(owner["_id"] as! NSString as String)
             }
                 
             var participantsArray: [String] = []
-            for participant in race["participants"] as NSArray {
-                participantsArray.append(participant["_id"] as NSString)
+            for participant in race["participants"] as! NSArray {
+                participantsArray.append(participant["_id"] as! NSString as String)
             }
                 
             var waypointsArray: [Waypoint] = []
-            for waypoint in race["locations"] as NSArray {
-                let location = waypoint["location"] as NSDictionary
-                let newWaypoint = Waypoint(
-                    id: waypoint["_id"] as String,
-                    name: location["name"] as String,
-                    description: location["description"] as String,
-                    lat: location["lat"] as Double,
-                    long: location["long"] as Double,
-                    distance: location["distance"] as Int
-                )
+            for waypoint in race["locations"] as! NSArray {
+                let newWaypoint = self.getWaypointData(waypoint["location"] as! String)
                 waypointsArray.append(newWaypoint)
             }
             
             let newRace = Race(
-                id: race["_id"] as String,
-                name: race["name"] as String,
-                isPrivate: race["private"] as Bool,
-                startTime: race["startTime"] as String,
+                id: race["_id"] as! String,
+                name: race["name"] as! String,
+                isPrivate: race["private"] as! Bool,
+                startTime: race["startTime"] as! String,
                 endTime: race["endTime"] as? String,
                 owners: ownersArray,
                 participants: participantsArray,
@@ -106,6 +110,38 @@ class RacesController: UIViewController {
         }
         refreshTableView()
         activityIndicator.stopAnimating()
+    }
+    
+    func getWaypointData(waypointID: String) -> Waypoint{
+        let authKey: String? = defaults.stringForKey("authKey")
+    
+        let url = NSURL(string: "\(self.restRace)locations/\(waypointID)?apikey=\(authKey!)")!
+        var request = NSMutableURLRequest(URL: url)
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        var response: AutoreleasingUnsafeMutablePointer<NSURLResponse?>=nil
+        var error: NSErrorPointer = nil
+        var dataVal: NSData =  NSURLConnection.sendSynchronousRequest(request, returningResponse: response, error:nil)!
+        var err: NSError
+        
+        var parseError: NSError?
+        let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(dataVal,
+            options: NSJSONReadingOptions.AllowFragments,
+            error:&parseError)
+        
+        return getWaypointDataFromJSON(parsedObject as! NSDictionary)
+    }
+    
+    func getWaypointDataFromJSON(waypoint: NSDictionary) -> Waypoint {
+        let waypoint = Waypoint(
+            id: waypoint["_id"] as! String,
+            name: waypoint["name"] as! String,
+            description: waypoint["description"] as! String,
+            lat: waypoint["lat"] as! Double,
+            long: waypoint["long"] as! Double,
+            distance: waypoint["distance"] as! Int
+        )
+        return waypoint
     }
     
     func refreshTableView() {
@@ -124,7 +160,7 @@ class RacesController: UIViewController {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var raceCell: RaceCell = self.tableView.dequeueReusableCellWithIdentifier("raceCell") as RaceCell
+        var raceCell: RaceCell = self.tableView.dequeueReusableCellWithIdentifier("raceCell") as! RaceCell
         raceCell.naam.text = self.racesData[indexPath.row].name
         raceCell.aantalWaypoints.text = String("\(self.racesData[indexPath.row].waypoints.count) waypoints")
         return raceCell
@@ -134,7 +170,7 @@ class RacesController: UIViewController {
         if (segue.identifier == "toRace") {
             let indexPath = self.tableView.indexPathForSelectedRow()
             let race: Race = racesData[indexPath!.row]
-            let raceController = segue.destinationViewController as RaceController
+            let raceController = segue.destinationViewController as! RaceController
             raceController.race = race
             raceController.hidesBottomBarWhenPushed = true;
         }

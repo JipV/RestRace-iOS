@@ -1,23 +1,32 @@
 //
-//  SettingsController.swift
+//  WaypointController.swift
 //  RestRace iOS
 //
-//  Created by User on 07/04/15.
+//  Created by Jip Verhoeven on 10/04/15.
 //  Copyright (c) 2015 User. All rights reserved.
 //
 
 import UIKit
 
-class SettingsController: UIViewController {
+class WaypointController: UIViewController {
+    
+    @IBOutlet weak var naamLabel: UILabel!
+    @IBOutlet weak var omschrijvingLabel: UILabel!
+    
+    var waypoint: Waypoint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.naamLabel.text = self.waypoint!.name!
+        self.waypoint!.description != nil ? (self.omschrijvingLabel.text = "Omschrijving:\n\(self.waypoint!.description!)") : (self.omschrijvingLabel.text = "")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+
     /*
     // MARK: - Navigation
 

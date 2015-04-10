@@ -20,11 +20,21 @@ class RaceController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.naamLabel.text = self.race!.name!
-        self.starttijdLabel.text = "Start time\n\(self.race!.startTime!)"
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        let startTime = dateFormatter.dateFromString(self.race!.startTime!)
+        println("Start: \(startTime)")
         
-        self.race!.endTime != nil ? (self.eindtijdLabel.text = "End time\n\(self.race!.endTime!)") :
-            (self.eindtijdLabel.text = "")
+        self.naamLabel.text = self.race!.name!
+        self.starttijdLabel.text = "Start time\n\(startTime)"
+        
+        if (self.race!.endTime != nil) {
+            let endTime = dateFormatter.dateFromString(self.race!.endTime!)
+            self.eindtijdLabel.text = "End time\n\(endTime)"
+        }
+        else {
+            self.eindtijdLabel.text = ""
+        }
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -42,10 +52,20 @@ class RaceController: UIViewController {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var waypointCell: WaypointCell = self.tableView.dequeueReusableCellWithIdentifier("waypointCell") as WaypointCell
+        var waypointCell: WaypointCell = self.tableView.dequeueReusableCellWithIdentifier("waypointCell") as! WaypointCell
         waypointCell.naam.text = self.race!.waypoints[indexPath.row].name
-        waypointCell.aantalDeelnemers.text = String("\(self.race!.waypoints.count) deelnemers")
+        waypointCell.aantalDeelnemers.text = String("\(self.race!.participants.count) deelnemers")
         return waypointCell
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "toWaypoint") {
+            let indexPath = self.tableView.indexPathForSelectedRow()
+            let waypoint: Waypoint = race!.waypoints[indexPath!.row]
+            let waypointController = segue.destinationViewController as! WaypointController
+            waypointController.waypoint = waypoint
+            waypointController.hidesBottomBarWhenPushed = true;
+        }
     }
 
     /*
