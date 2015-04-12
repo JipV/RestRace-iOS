@@ -26,35 +26,36 @@ class DeelnemenController: UIViewController {
     @IBAction func deelnemenAanRace(sender: UIButton) {
         if (!self.codeTextField.text.isEmpty) {
             
-            /*let raceID: String = self.codeTextField.text
+            let raceID: String = self.codeTextField.text
             let authKey: String? = defaults.stringForKey("authKey")
             
-            let url = NSURL(string: "\(restRace)races/\(raceID)/participant")!
+            let url = NSURL(string: "\(restRace)races/\(raceID)/participant?apikey=\(authKey!)")!
             var request = NSMutableURLRequest(URL: url)
             request.addValue("application/json", forHTTPHeaderField: "Accept")
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             
             request.HTTPMethod = "PUT"
             
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
                 (response, data, error) in
-                
-                var parseError: NSError?
-                let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
-                    options: NSJSONReadingOptions.AllowFragments,
-                    error:&parseError)
-                
-                // Check of het is gelukt
-                // Zo ja toon races pagina, zo nee geef melding en maak tekst veld leeg
-                //self.getUserFromJSON(parsedObject as! NSDictionary)
-            }*/
-            
-            
-            
-            
-            navigationController?.popViewControllerAnimated(true)
-            self.codeTextField.text = ""
+        
+                self.response(response as! NSHTTPURLResponse)
+            }
         }
+    }
+    
+    func response(response: NSHTTPURLResponse) {
+        if (response.statusCode == 200) {
+            navigationController?.popViewControllerAnimated(true)
+        }
+        else {
+            var refreshAlert = UIAlertController(title: "Mislukt", message: "Het deelnemen aan de race is mislukt.\nProbeer het opnieuw.", preferredStyle: UIAlertControllerStyle.Alert)
+            refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
+            presentViewController(refreshAlert, animated: true, completion: nil)  
+        }
+    }
+    
+    @IBAction func onTapMainView(sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     /*

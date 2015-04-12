@@ -48,6 +48,7 @@ class RacesController: UIViewController {
         refreshTableView()
         
         let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(nil, forKey: "id")
         defaults.setObject(nil, forKey: "authKey")
         defaults.setObject(nil, forKey: "nickname")
         defaults.setObject(nil, forKey: "visitedWaypoints")
@@ -136,12 +137,53 @@ class RacesController: UIViewController {
         let waypoint = Waypoint(
             id: waypoint["_id"] as! String,
             name: waypoint["name"] as! String,
-            description: waypoint["description"] as! String,
+            description: waypoint["description"] as? String,
             lat: waypoint["lat"] as! Double,
             long: waypoint["long"] as! Double,
             distance: waypoint["distance"] as! Int
         )
         return waypoint
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle  editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath:   NSIndexPath) {
+        
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            
+            let alert = UIAlertController(title: "Race verwijderen", message: "Weet u zeker dat u de race wilt verwijderen? U bent dan geen deelnemer meer van de race.", preferredStyle: .Alert)
+            
+            let neeActie = UIAlertAction(title: "Nee", style: .Cancel, handler: nil)
+            alert.addAction(neeActie)
+            
+            let jaActie = UIAlertAction(title: "Ja", style: .Default) { (action) in
+                
+                let raceID: String = self.racesData[indexPath.row].id!
+                let authKey: String? = self.defaults.stringForKey("authKey")
+                
+                let url = NSURL(string: "\(self.restRace)races/\(raceID)/participant?apikey=\(authKey!)")!
+                var request = NSMutableURLRequest(URL: url)
+                request.addValue("application/json", forHTTPHeaderField: "Accept")
+                
+                request.HTTPMethod = "DELETE"
+                
+                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+                    (response, data, error) in
+                    
+                    let response = response as! NSHTTPURLResponse
+                    if (response.statusCode == 200) {
+                        self.racesData.removeAtIndex(indexPath.row)
+                        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    }
+                    else {
+                        var refreshAlert = UIAlertController(title: "Mislukt", message: "Het verwijderen van de race is mislukt.", preferredStyle: UIAlertControllerStyle.Alert)
+                        refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
+                        self.presentViewController(refreshAlert, animated: true, completion: nil)
+                    }
+                }
+            }
+            alert.addAction(jaActie)
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
     
     func refreshTableView() {

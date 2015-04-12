@@ -17,7 +17,7 @@ class Waypoint {
     var long: Double?
     var distance: Int?
     
-    init(id: String, name: String, description: String, lat: Double, long: Double, distance: Int) {
+    init(id: String, name: String, description: String?, lat: Double, long: Double, distance: Int) {
         
         self.id = id
         self.name = name

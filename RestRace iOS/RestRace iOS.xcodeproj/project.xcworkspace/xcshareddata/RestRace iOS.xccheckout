@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>77C75F49-980C-47CF-B827-D9DA29139049</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>RestRace iOS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>C7B87717D33B1D852B2F7B5DDA594D1E72E3D589</key>
 		<string>https://github.com/JipV/RestRace-iOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>RestRace iOS/RestRace iOS.xcodeproj/project.xcworkspace</string>
+	<string>RestRace iOS/RestRace iOS.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>C7B87717D33B1D852B2F7B5DDA594D1E72E3D589</key>

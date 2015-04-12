@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
 
 class RaceController: UIViewController {
+    
+    let restRace: String = "https://restrace2.herokuapp.com/"
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
+    var locManager = CLLocationManager()
     
     @IBOutlet weak var naamLabel: UILabel!
     @IBOutlet weak var starttijdLabel: UILabel!
@@ -21,8 +27,8 @@ class RaceController: UIViewController {
         super.viewDidLoad()
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
-        let startTime = dateFormatter.dateFromString(self.race!.startTime!)
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        var startTime = dateFormatter.dateFromString(self.race!.startTime!)
         println("Start: \(startTime)")
         
         self.naamLabel.text = self.race!.name!
@@ -68,6 +74,85 @@ class RaceController: UIViewController {
         }
     }
 
+    @IBAction func inchecken(sender: UIButton) {
+        locManager.requestWhenInUseAuthorization()
+        
+        if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse) {
+            locManager.startUpdatingLocation()
+            if (locManager.location != nil) {
+                let currentLocation = locManager.location
+            
+                let raceID: String = self.race!.id!
+                let lat = currentLocation.coordinate.latitude
+                let long = currentLocation.coordinate.longitude
+                let authKey: String? = defaults.stringForKey("authKey")
+            
+                let url = NSURL(string: "\(restRace)races/\(raceID)/location/\(lat)/\(long)?apikey=\(authKey!)")!
+                var request = NSMutableURLRequest(URL: url)
+                request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+                request.HTTPMethod = "PUT"
+            
+                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+                    (response, data, error) in
+                
+                    var parseError: NSError?
+                    let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
+                        options: NSJSONReadingOptions.AllowFragments,
+                        error:&parseError)
+                    
+                    self.response(parsedObject as! NSDictionary)
+                }
+                
+            println("lat = \(currentLocation.coordinate.latitude)")
+            println("long = \(currentLocation.coordinate.longitude)")
+            }
+            else {
+                var refreshAlert = UIAlertController(title: "Mislukt", message: "Er is geen locatie gevonden.", preferredStyle: UIAlertControllerStyle.Alert)
+                refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
+                presentViewController(refreshAlert, animated: true, completion: nil)
+            }
+        }
+        else if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.Denied) {
+            
+            let alert = UIAlertController(title: "Geen toegang tot locatie", message: "Om in te kunnen checken heeft de app toegang nodig tot de locatie. U kunt setttings openen om de toegang te wijzigen.", preferredStyle: .Alert)
+            
+            let cancelActie = UIAlertAction(title: "Sluiten", style: .Cancel, handler: nil)
+            alert.addAction(cancelActie)
+            
+            let openActie = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
+                if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+                    UIApplication.sharedApplication().openURL(url)
+                }
+                
+            }
+            alert.addAction(openActie)
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func response(result: NSDictionary) {
+        if (result["checkedIn"] as? Bool == true) {
+            
+            var visitedWaypointsArray: [String] = []
+            for visitedWaypoint in result["locations"] as! NSArray {
+                let waypoint = visitedWaypoint as! NSDictionary
+                visitedWaypointsArray.append(visitedWaypoint["location"] as! String)
+            }
+            defaults.setObject(visitedWaypointsArray, forKey: "visitedWaypoints")
+            
+            var refreshAlert = UIAlertController(title: "Ingecheckt", message: "U bent dicht genoeg bij een waypoint en bent ingecheckt.", preferredStyle: UIAlertControllerStyle.Alert)
+            refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
+            presentViewController(refreshAlert, animated: true, completion: nil)
+        }
+        else {
+            var refreshAlert = UIAlertController(title: "Niet ingecheckt", message: "U bent niet dicht genoeg bij een waypoint en bent daarom niet ingecheckt.", preferredStyle: UIAlertControllerStyle.Alert)
+            refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
+            presentViewController(refreshAlert, animated: true, completion: nil)
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
