@@ -30,14 +30,6 @@ class RacesController: UIViewController {
         activityIndicator.frame = CGRectMake(100, 100, 100, 100);
         self.view.addSubview(activityIndicator)
         
-        if (self.racesData.count > 0) {
-            self.tableView.hidden = false;
-            self.yourLabel.hidden = true;
-        } else {
-            self.tableView.hidden = true;
-            self.yourLabel.hidden = false;
-        }
-        
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         var backgroundView = UIView(frame: CGRectZero)
@@ -105,7 +97,15 @@ class RacesController: UIViewController {
                 
             var waypointsArray: [Waypoint] = []
             for waypoint in race["locations"] as! NSArray {
-                let newWaypoint = self.getWaypointData(waypoint["location"] as! String)
+                let location = waypoint["location"] as! NSDictionary
+                let newWaypoint = Waypoint(
+                    id: waypoint["_id"] as! String,
+                    name: location["name"] as! String,
+                    description: location["description"] as? String,
+                    lat: location["lat"] as! Double,
+                    long: location["long"] as! Double,
+                    distance: location["distance"] as! Int
+                )
                 waypointsArray.append(newWaypoint)
             }
             
@@ -123,38 +123,6 @@ class RacesController: UIViewController {
         }
         refreshTableView()
         activityIndicator.stopAnimating()
-    }
-    
-    func getWaypointData(waypointID: String) -> Waypoint{
-        let authKey: String? = defaults.stringForKey("authKey")
-    
-        let url = NSURL(string: "\(self.restRace)locations/\(waypointID)?apikey=\(authKey!)")!
-        var request = NSMutableURLRequest(URL: url)
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        var response: AutoreleasingUnsafeMutablePointer<NSURLResponse?>=nil
-        var error: NSErrorPointer = nil
-        var dataVal: NSData =  NSURLConnection.sendSynchronousRequest(request, returningResponse: response, error:nil)!
-        var err: NSError
-        
-        var parseError: NSError?
-        let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(dataVal,
-            options: NSJSONReadingOptions.AllowFragments,
-            error:&parseError)
-        
-        return getWaypointDataFromJSON(parsedObject as! NSDictionary)
-    }
-    
-    func getWaypointDataFromJSON(waypoint: NSDictionary) -> Waypoint {
-        let waypoint = Waypoint(
-            id: waypoint["_id"] as! String,
-            name: waypoint["name"] as! String,
-            description: waypoint["description"] as? String,
-            lat: waypoint["lat"] as! Double,
-            long: waypoint["long"] as! Double,
-            distance: waypoint["distance"] as! Int
-        )
-        return waypoint
     }
     
     func tableView(tableView: UITableView, commitEditingStyle  editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath:   NSIndexPath) {
@@ -215,8 +183,6 @@ class RacesController: UIViewController {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var raceCell: RaceCell = self.tableView.dequeueReusableCellWithIdentifier("raceCell") as! RaceCell
-        raceCell.naam.text = self.racesData[indexPath.row].name
-        raceCell.aantalWaypoints.text = String("\(self.racesData[indexPath.row].waypoints.count) waypoints")
         
         let visitedWaypoints = self.defaults.arrayForKey("visitedWaypoints") as! [String]
         
@@ -230,6 +196,9 @@ class RacesController: UIViewController {
         if (aantalVisitedWaypoints < self.racesData[indexPath.row].waypoints.count) {
             raceCell.vinkje.hidden = true
         }
+        
+        raceCell.naam.text = self.racesData[indexPath.row].name
+        raceCell.aantalWaypoints.text = String("\(aantalVisitedWaypoints)/\(self.racesData[indexPath.row].waypoints.count) waypoints")
         
         return raceCell
     }

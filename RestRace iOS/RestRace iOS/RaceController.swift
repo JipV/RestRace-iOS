@@ -27,22 +27,23 @@ class RaceController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
-        
-        /*var date = self.race!.startTime!
-        date = date.substringWithRange(Range<String.Index>(start: advance(date.startIndex, 0), end: advance(date.endIndex, -5)))
-        println(date)*/
-        
-        var startTime = dateFormatter.dateFromString(self.race!.startTime!)
-        println("Start: \(startTime)")
-        
         self.naamLabel.text = self.race!.name!
-        self.starttijdLabel.text = "Start time\n\(startTime)"
+        
+        let dateFormatter = NSDateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'.000Z'"
+        let startTimeAsDate = dateFormatter.dateFromString(self.race!.startTime!)
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        let startTimeAsString = dateFormatter.stringFromDate(startTimeAsDate!)
+        
+        self.starttijdLabel.text = "Start time\n\(startTimeAsString)"
         
         if (self.race!.endTime != nil) {
-            let endTime = dateFormatter.dateFromString(self.race!.endTime!)
-            self.eindtijdLabel.text = "End time\n\(endTime)"
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'.000Z'"
+            let endTimeAsDate = dateFormatter.dateFromString(self.race!.endTime!)
+            dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+            let endTimeAsString = dateFormatter.stringFromDate(endTimeAsDate!)
+            self.eindtijdLabel.text = "End time\n\(endTimeAsString)"
         }
         else {
             self.eindtijdLabel.text = ""
@@ -64,13 +65,12 @@ class RaceController: UIViewController {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 55.0
+        return 44.0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var waypointCell: WaypointCell = self.tableView.dequeueReusableCellWithIdentifier("waypointCell") as! WaypointCell
         waypointCell.naam.text = self.race!.waypoints[indexPath.row].name
-        waypointCell.aantalDeelnemers.text = String("\(self.race!.participants.count) deelnemers")
         
         let visitedWaypoints = self.defaults.arrayForKey("visitedWaypoints") as! [String]
         if (find(visitedWaypoints, self.race!.waypoints[indexPath.row].id!) == nil) {
