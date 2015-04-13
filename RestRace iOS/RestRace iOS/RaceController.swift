@@ -119,9 +119,6 @@ class RaceController: UIViewController {
                     
                     self.response(parsedObject as! NSDictionary)
                 }
-                
-            println("lat = \(currentLocation.coordinate.latitude)")
-            println("long = \(currentLocation.coordinate.longitude)")
             }
             else {
                 var refreshAlert = UIAlertController(title: "Mislukt", message: "Er is geen locatie gevonden.", preferredStyle: UIAlertControllerStyle.Alert)

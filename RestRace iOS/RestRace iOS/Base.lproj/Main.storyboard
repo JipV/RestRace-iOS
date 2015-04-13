@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6yb-Qm-Id8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6yb-Qm-Id8">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
@@ -82,7 +82,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="l6y-Gn-KTr">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="raceCell" rowHeight="55" id="Tmr-3X-9Ix" customClass="RaceCell" customModule="RestRace_iOS" customModuleProvider="target">
@@ -139,15 +139,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="l6y-Gn-KTr" firstAttribute="top" secondItem="N9E-V8-CTx" secondAttribute="top" id="JVy-PW-b8x"/>
-                            <constraint firstAttribute="trailing" secondItem="l6y-Gn-KTr" secondAttribute="trailing" id="XoA-Nb-Yv8"/>
-                            <constraint firstAttribute="bottom" secondItem="l6y-Gn-KTr" secondAttribute="bottom" id="yBL-7O-c5c"/>
-                            <constraint firstItem="l6y-Gn-KTr" firstAttribute="leading" secondItem="N9E-V8-CTx" secondAttribute="leading" id="zCO-zn-WlC"/>
+                            <constraint firstAttribute="trailing" secondItem="l6y-Gn-KTr" secondAttribute="trailing" id="1HR-1R-ZTs"/>
+                            <constraint firstItem="l6y-Gn-KTr" firstAttribute="leading" secondItem="N9E-V8-CTx" secondAttribute="leading" id="ALC-uN-B91"/>
+                            <constraint firstItem="l6y-Gn-KTr" firstAttribute="bottom" secondItem="sp3-k9-zMD" secondAttribute="top" id="QbG-m3-QvS"/>
+                            <constraint firstItem="l6y-Gn-KTr" firstAttribute="top" secondItem="N9E-V8-CTx" secondAttribute="top" id="SUU-jB-fIC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Races" id="ZgX-7j-yHi">
                         <barButtonItem key="leftBarButtonItem" title="Item" style="plain" id="TNj-Rz-iys">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qTC-MD-wc8">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qTC-MD-wc8">
                                 <rect key="frame" x="16" y="10" width="100" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Deelnemen">
@@ -161,7 +161,7 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="blT-Ot-Uqu">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LyU-DB-sF6">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LyU-DB-sF6">
                                 <rect key="frame" x="509" y="10" width="80" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Uitloggen">
@@ -771,13 +771,13 @@
                                             <constraint firstAttribute="width" constant="143" id="95u-aq-PBd"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ouG-ac-PId">
                                         <rect key="frame" x="159" y="8" width="433" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41i-E0-gOT">

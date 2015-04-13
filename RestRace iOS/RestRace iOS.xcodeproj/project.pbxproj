@@ -97,22 +97,14 @@
 		CE37F43F1ACEC0130082DA09 /* RestRace iOS */ = {
 			isa = PBXGroup;
 			children = (
+				CE7BC93E1ADC4E5F00EA6471 /* Controllers */,
+				CE7BC93D1ADC4E4000EA6471 /* Models */,
+				CE7BC93C1ADC4E2000EA6471 /* Views */,
 				CE37F4421ACEC0130082DA09 /* AppDelegate.swift */,
 				CE37F4461ACEC0130082DA09 /* Main.storyboard */,
 				CE37F4491ACEC0130082DA09 /* Images.xcassets */,
 				CE37F44B1ACEC0130082DA09 /* LaunchScreen.xib */,
 				CE37F4401ACEC0130082DA09 /* Supporting Files */,
-				CE37F4621ACEE5A30082DA09 /* RacesController.swift */,
-				CE835FA61AD01CE000B23F95 /* RaceCell.swift */,
-				CE00F9761AD164C3001736A6 /* Race.swift */,
-				CE00F97A1AD2741A001736A6 /* Waypoint.swift */,
-				CE0984B71AD2C93E002D9DF0 /* ProfielController.swift */,
-				CE77E7FB1AD312B20048D1AF /* InloggenController.swift */,
-				CE4B5E5D1AD44AA4000C1CA3 /* RegistrerenController.swift */,
-				CE1BB0DE1AD6A67000FACA4D /* RaceController.swift */,
-				CE9407FD1AD6FAC300E5299A /* WaypointCell.swift */,
-				EC3E36491AD7C8B3004B98C6 /* WaypointController.swift */,
-				ECE2B0B61AD80C8600039BF0 /* DeelnemenController.swift */,
 			);
 			path = "RestRace iOS";
 			sourceTree = "<group>";
@@ -140,6 +132,38 @@
 				CE37F4571ACEC0130082DA09 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE7BC93C1ADC4E2000EA6471 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE835FA61AD01CE000B23F95 /* RaceCell.swift */,
+				CE9407FD1AD6FAC300E5299A /* WaypointCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		CE7BC93D1ADC4E4000EA6471 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE00F97A1AD2741A001736A6 /* Waypoint.swift */,
+				CE00F9761AD164C3001736A6 /* Race.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		CE7BC93E1ADC4E5F00EA6471 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				ECE2B0B61AD80C8600039BF0 /* DeelnemenController.swift */,
+				EC3E36491AD7C8B3004B98C6 /* WaypointController.swift */,
+				CE77E7FB1AD312B20048D1AF /* InloggenController.swift */,
+				CE4B5E5D1AD44AA4000C1CA3 /* RegistrerenController.swift */,
+				CE37F4621ACEE5A30082DA09 /* RacesController.swift */,
+				CE0984B71AD2C93E002D9DF0 /* ProfielController.swift */,
+				CE1BB0DE1AD6A67000FACA4D /* RaceController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
