@@ -12,6 +12,7 @@ class WaypointCell: UITableViewCell {
     
     @IBOutlet weak var naam: UILabel!
     @IBOutlet weak var aantalDeelnemers: UILabel!
+    @IBOutlet weak var vinkje: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

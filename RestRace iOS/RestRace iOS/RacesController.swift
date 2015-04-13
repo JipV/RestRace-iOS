@@ -205,6 +205,20 @@ class RacesController: UIViewController {
         var raceCell: RaceCell = self.tableView.dequeueReusableCellWithIdentifier("raceCell") as! RaceCell
         raceCell.naam.text = self.racesData[indexPath.row].name
         raceCell.aantalWaypoints.text = String("\(self.racesData[indexPath.row].waypoints.count) waypoints")
+        
+        let visitedWaypoints = self.defaults.arrayForKey("visitedWaypoints") as! [String]
+        
+        var aantalVisitedWaypoints: Int = 0
+        for waypoint in self.racesData[indexPath.row].waypoints {
+            if (find(visitedWaypoints, waypoint.id!) != nil) {
+                aantalVisitedWaypoints++
+            }
+        }
+        
+        if (aantalVisitedWaypoints < self.racesData[indexPath.row].waypoints.count) {
+            raceCell.vinkje.hidden = true
+        }
+        
         return raceCell
     }
     

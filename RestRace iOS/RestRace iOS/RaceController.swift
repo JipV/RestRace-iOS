@@ -30,11 +30,11 @@ class RaceController: UIViewController {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
         
-        var date = self.race!.startTime!
+        /*var date = self.race!.startTime!
         date = date.substringWithRange(Range<String.Index>(start: advance(date.startIndex, 0), end: advance(date.endIndex, -5)))
-        println(date)
+        println(date)*/
         
-        var startTime = dateFormatter.dateFromString(date)
+        var startTime = dateFormatter.dateFromString(self.race!.startTime!)
         println("Start: \(startTime)")
         
         self.naamLabel.text = self.race!.name!
@@ -67,6 +67,12 @@ class RaceController: UIViewController {
         var waypointCell: WaypointCell = self.tableView.dequeueReusableCellWithIdentifier("waypointCell") as! WaypointCell
         waypointCell.naam.text = self.race!.waypoints[indexPath.row].name
         waypointCell.aantalDeelnemers.text = String("\(self.race!.participants.count) deelnemers")
+        
+        let visitedWaypoints = self.defaults.arrayForKey("visitedWaypoints") as! [String]
+        if (find(visitedWaypoints, self.race!.waypoints[indexPath.row].id!) == nil) {
+            waypointCell.vinkje.hidden = true
+        }
+        
         return waypointCell
     }
     

@@ -12,6 +12,7 @@ class RaceCell: UITableViewCell {
 
     @IBOutlet weak var naam: UILabel!
     @IBOutlet weak var aantalWaypoints: UILabel!
+    @IBOutlet weak var vinkje: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
