@@ -52,7 +52,6 @@ class RacesController: UIViewController {
         refreshTableView()
         
         let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(nil, forKey: "id")
         defaults.setObject(nil, forKey: "authKey")
         defaults.setObject(nil, forKey: "nickname")
         defaults.setObject(nil, forKey: "visitedWaypoints")

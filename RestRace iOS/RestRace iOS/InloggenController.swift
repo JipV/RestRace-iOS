@@ -57,7 +57,6 @@ class InloggenController: UIViewController {
                 visitedWaypointsArray.append(visitedWaypoint["location"] as! String)
             }
             
-            defaults.setObject(user["_id"] as! String, forKey: "id")
             defaults.setObject(user["authKey"] as! String, forKey: "authKey")
             defaults.setObject(user["nickname"] as? String, forKey: "nickname")
             defaults.setObject(visitedWaypointsArray, forKey: "visitedWaypoints")
