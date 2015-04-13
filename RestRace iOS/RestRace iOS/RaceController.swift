@@ -49,6 +49,10 @@ class RaceController: UIViewController {
         }
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        var backgroundView = UIView(frame: CGRectZero)
+        self.tableView.tableFooterView = backgroundView
+        self.tableView.backgroundColor = UIColor.clearColor()
     }
 
     override func didReceiveMemoryWarning() {

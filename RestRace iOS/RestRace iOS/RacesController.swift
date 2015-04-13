@@ -30,7 +30,19 @@ class RacesController: UIViewController {
         activityIndicator.frame = CGRectMake(100, 100, 100, 100);
         self.view.addSubview(activityIndicator)
         
+        if (self.racesData.count > 0) {
+            self.tableView.hidden = false;
+            self.yourLabel.hidden = true;
+        } else {
+            self.tableView.hidden = true;
+            self.yourLabel.hidden = false;
+        }
+        
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        var backgroundView = UIView(frame: CGRectZero)
+        self.tableView.tableFooterView = backgroundView
+        self.tableView.backgroundColor = UIColor.clearColor()
     }
     
     override func viewDidAppear(animated: Bool) {
