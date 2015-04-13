@@ -17,7 +17,6 @@
 		CE37F44D1ACEC0130082DA09 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE37F44B1ACEC0130082DA09 /* LaunchScreen.xib */; };
 		CE37F4591ACEC0130082DA09 /* RestRace_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37F4581ACEC0130082DA09 /* RestRace_iOSTests.swift */; };
 		CE37F4631ACEE5A30082DA09 /* RacesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37F4621ACEE5A30082DA09 /* RacesController.swift */; };
-		CE4789981AD5A564002E8B22 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4789971AD5A564002E8B22 /* User.swift */; };
 		CE4B5E5E1AD44AA4000C1CA3 /* RegistrerenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B5E5D1AD44AA4000C1CA3 /* RegistrerenController.swift */; };
 		CE77E7FC1AD312B20048D1AF /* InloggenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77E7FB1AD312B20048D1AF /* InloggenController.swift */; };
 		CE835FA71AD01CE000B23F95 /* RaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE835FA61AD01CE000B23F95 /* RaceCell.swift */; };
@@ -51,7 +50,6 @@
 		CE37F4571ACEC0130082DA09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE37F4581ACEC0130082DA09 /* RestRace_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestRace_iOSTests.swift; sourceTree = "<group>"; };
 		CE37F4621ACEE5A30082DA09 /* RacesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RacesController.swift; sourceTree = "<group>"; };
-		CE4789971AD5A564002E8B22 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE4B5E5D1AD44AA4000C1CA3 /* RegistrerenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrerenController.swift; sourceTree = "<group>"; };
 		CE77E7FB1AD312B20048D1AF /* InloggenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InloggenController.swift; sourceTree = "<group>"; };
 		CE835FA61AD01CE000B23F95 /* RaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceCell.swift; sourceTree = "<group>"; };
@@ -111,7 +109,6 @@
 				CE0984B71AD2C93E002D9DF0 /* ProfielController.swift */,
 				CE77E7FB1AD312B20048D1AF /* InloggenController.swift */,
 				CE4B5E5D1AD44AA4000C1CA3 /* RegistrerenController.swift */,
-				CE4789971AD5A564002E8B22 /* User.swift */,
 				CE1BB0DE1AD6A67000FACA4D /* RaceController.swift */,
 				CE9407FD1AD6FAC300E5299A /* WaypointCell.swift */,
 				EC3E36491AD7C8B3004B98C6 /* WaypointController.swift */,
@@ -257,7 +254,6 @@
 				CE4B5E5E1AD44AA4000C1CA3 /* RegistrerenController.swift in Sources */,
 				CE00F9771AD164C4001736A6 /* Race.swift in Sources */,
 				ECE2B0B71AD80C8600039BF0 /* DeelnemenController.swift in Sources */,
-				CE4789981AD5A564002E8B22 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
