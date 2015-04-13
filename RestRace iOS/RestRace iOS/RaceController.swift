@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import CoreLocation
 
 class RaceController: UIViewController {
@@ -27,8 +28,13 @@ class RaceController: UIViewController {
         super.viewDidLoad()
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        var startTime = dateFormatter.dateFromString(self.race!.startTime!)
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
+        
+        var date = self.race!.startTime!
+        date = date.substringWithRange(Range<String.Index>(start: advance(date.startIndex, 0), end: advance(date.endIndex, -5)))
+        println(date)
+        
+        var startTime = dateFormatter.dateFromString(date)
         println("Start: \(startTime)")
         
         self.naamLabel.text = self.race!.name!

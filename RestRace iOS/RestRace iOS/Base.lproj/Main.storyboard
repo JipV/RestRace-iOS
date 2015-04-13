@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6yb-Qm-Id8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6yb-Qm-Id8">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -90,27 +91,36 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Naam" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0t-A3-dhu">
-                                                    <rect key="frame" x="8" y="8" width="559" height="21"/>
+                                                    <rect key="frame" x="8" y="8" width="505" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vinkje" translatesAutoresizingMaskIntoConstraints="NO" id="SiT-iv-nm2">
+                                                    <rect key="frame" x="521" y="8" width="38" height="38"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="38" id="BR0-XH-s4U"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aantal waypoints" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGN-0b-9aW">
-                                                    <rect key="frame" x="8" y="25" width="559" height="21"/>
+                                                    <rect key="frame" x="8" y="25" width="505" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="g0t-A3-dhu" firstAttribute="leading" secondItem="V5e-Pb-YPT" secondAttribute="leadingMargin" id="7BM-D0-Giq"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="g0t-A3-dhu" secondAttribute="trailing" constant="-8" id="9lz-xh-Mj3"/>
-                                                <constraint firstItem="GGN-0b-9aW" firstAttribute="bottom" secondItem="V5e-Pb-YPT" secondAttribute="bottomMargin" id="TXm-p6-a09"/>
-                                                <constraint firstItem="g0t-A3-dhu" firstAttribute="top" secondItem="V5e-Pb-YPT" secondAttribute="topMargin" id="W4N-23-6bP"/>
-                                                <constraint firstItem="g0t-A3-dhu" firstAttribute="leading" secondItem="GGN-0b-9aW" secondAttribute="leading" id="dqN-5q-TqO"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="g0t-A3-dhu" secondAttribute="bottom" constant="17" id="evt-X5-ZJX"/>
-                                                <constraint firstItem="g0t-A3-dhu" firstAttribute="trailing" secondItem="GGN-0b-9aW" secondAttribute="trailing" id="yeP-JQ-Q2i"/>
-                                                <constraint firstItem="GGN-0b-9aW" firstAttribute="top" secondItem="V5e-Pb-YPT" secondAttribute="topMargin" constant="17" id="zRd-Jf-hDx"/>
+                                                <constraint firstItem="GGN-0b-9aW" firstAttribute="bottom" secondItem="SiT-iv-nm2" secondAttribute="bottom" id="0sx-Y3-Brn"/>
+                                                <constraint firstItem="g0t-A3-dhu" firstAttribute="top" secondItem="V5e-Pb-YPT" secondAttribute="topMargin" id="3Mj-ec-qzu"/>
+                                                <constraint firstItem="g0t-A3-dhu" firstAttribute="leading" secondItem="V5e-Pb-YPT" secondAttribute="leadingMargin" id="4mP-yB-bL7"/>
+                                                <constraint firstItem="GGN-0b-9aW" firstAttribute="leading" secondItem="g0t-A3-dhu" secondAttribute="leading" id="BSB-qS-3Vw"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="g0t-A3-dhu" secondAttribute="bottom" constant="17" id="MHI-Py-ztM"/>
+                                                <constraint firstItem="SiT-iv-nm2" firstAttribute="leading" secondItem="GGN-0b-9aW" secondAttribute="trailing" constant="8" symbolic="YES" id="QWt-fe-gWC"/>
+                                                <constraint firstItem="SiT-iv-nm2" firstAttribute="trailing" secondItem="V5e-Pb-YPT" secondAttribute="trailingMargin" id="T3i-sc-Jb6"/>
+                                                <constraint firstItem="GGN-0b-9aW" firstAttribute="top" secondItem="V5e-Pb-YPT" secondAttribute="topMargin" constant="17" id="Ucd-C5-Tj2"/>
+                                                <constraint firstItem="g0t-A3-dhu" firstAttribute="top" secondItem="SiT-iv-nm2" secondAttribute="top" id="aey-q5-JsV"/>
+                                                <constraint firstItem="SiT-iv-nm2" firstAttribute="leading" secondItem="g0t-A3-dhu" secondAttribute="trailing" constant="8" symbolic="YES" id="vet-Jw-tqK"/>
+                                                <constraint firstItem="GGN-0b-9aW" firstAttribute="bottom" secondItem="V5e-Pb-YPT" secondAttribute="bottomMargin" id="x0n-wR-GKw"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -265,27 +275,36 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aantal deelnemers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dK-Kg-f5A">
-                                                    <rect key="frame" x="0.0" y="25" width="550" height="21"/>
+                                                    <rect key="frame" x="0.0" y="25" width="482" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vinkje" translatesAutoresizingMaskIntoConstraints="NO" id="oJl-ZW-hTT">
+                                                    <rect key="frame" x="490" y="8" width="38" height="38"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="38" id="S60-fv-jqj"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Naam" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65m-1F-Gd7">
-                                                    <rect key="frame" x="0.0" y="8" width="558" height="21"/>
+                                                    <rect key="frame" x="0.0" y="8" width="482" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="65m-1F-Gd7" firstAttribute="leading" secondItem="7dK-Kg-f5A" secondAttribute="leading" id="6iX-6Z-qYg"/>
-                                                <constraint firstItem="7dK-Kg-f5A" firstAttribute="leading" secondItem="qjI-kY-16X" secondAttribute="leading" id="BVK-Pr-USH"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="7dK-Kg-f5A" secondAttribute="trailing" constant="-22" id="DR9-Ca-6NM"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="65m-1F-Gd7" secondAttribute="trailing" constant="-30" id="KHV-uG-sCk"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="65m-1F-Gd7" secondAttribute="bottom" constant="17" id="LCj-fP-YQB"/>
-                                                <constraint firstItem="7dK-Kg-f5A" firstAttribute="top" secondItem="qjI-kY-16X" secondAttribute="topMargin" constant="17" id="NFO-dY-mIB"/>
-                                                <constraint firstItem="7dK-Kg-f5A" firstAttribute="bottom" secondItem="qjI-kY-16X" secondAttribute="bottomMargin" id="hMV-Mt-G9Y"/>
-                                                <constraint firstItem="65m-1F-Gd7" firstAttribute="top" secondItem="qjI-kY-16X" secondAttribute="topMargin" id="ywg-ZZ-MfT"/>
+                                                <constraint firstItem="7dK-Kg-f5A" firstAttribute="bottom" secondItem="qjI-kY-16X" secondAttribute="bottomMargin" id="5mT-P9-5MD"/>
+                                                <constraint firstItem="oJl-ZW-hTT" firstAttribute="bottom" secondItem="7dK-Kg-f5A" secondAttribute="bottom" id="Ae7-eq-JNF"/>
+                                                <constraint firstItem="7dK-Kg-f5A" firstAttribute="leading" secondItem="qjI-kY-16X" secondAttribute="leading" id="D8O-2k-2lq"/>
+                                                <constraint firstItem="oJl-ZW-hTT" firstAttribute="top" secondItem="65m-1F-Gd7" secondAttribute="top" id="Gj6-OT-ETt"/>
+                                                <constraint firstItem="65m-1F-Gd7" firstAttribute="top" secondItem="qjI-kY-16X" secondAttribute="topMargin" id="PGg-aJ-sYc"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="65m-1F-Gd7" secondAttribute="bottom" constant="17" id="SQP-CV-QSc"/>
+                                                <constraint firstItem="oJl-ZW-hTT" firstAttribute="trailing" secondItem="qjI-kY-16X" secondAttribute="trailingMargin" id="X7W-ia-SL8"/>
+                                                <constraint firstItem="oJl-ZW-hTT" firstAttribute="leading" secondItem="7dK-Kg-f5A" secondAttribute="trailing" constant="8" symbolic="YES" id="aGd-Nn-aYS"/>
+                                                <constraint firstItem="oJl-ZW-hTT" firstAttribute="leading" secondItem="65m-1F-Gd7" secondAttribute="trailing" constant="8" symbolic="YES" id="ih6-SM-G1y"/>
+                                                <constraint firstItem="7dK-Kg-f5A" firstAttribute="leading" secondItem="65m-1F-Gd7" secondAttribute="leading" id="jz1-9I-ecG"/>
+                                                <constraint firstItem="7dK-Kg-f5A" firstAttribute="top" secondItem="qjI-kY-16X" secondAttribute="topMargin" constant="17" id="viS-Wi-x43"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -821,5 +840,6 @@
         <image name="Deelnemen" width="24" height="24"/>
         <image name="Profiel" width="24" height="24"/>
         <image name="Races" width="24" height="24"/>
+        <image name="Vinkje" width="24" height="24"/>
     </resources>
 </document>
