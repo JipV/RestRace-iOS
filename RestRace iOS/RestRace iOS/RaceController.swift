@@ -2,8 +2,8 @@
 //  RaceController.swift
 //  RestRace iOS
 //
-//  Created by User on 09/04/15.
-//  Copyright (c) 2015 User. All rights reserved.
+//  Created by Jip Verhoeven on 09/04/15.
+//  Copyright (c) 2015 Jip Verhoeven. All rights reserved.
 //
 
 import UIKit
@@ -11,9 +11,6 @@ import Foundation
 import CoreLocation
 
 class RaceController: UIViewController {
-    
-    let restRace: String = "https://restrace2.herokuapp.com/"
-    let defaults = NSUserDefaults.standardUserDefaults()
     
     var locManager = CLLocationManager()
     
@@ -31,6 +28,7 @@ class RaceController: UIViewController {
         
         let dateFormatter = NSDateFormatter()
         
+        // Toont de start tijd in het goede formaat
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'.000Z'"
         let startTimeAsDate = dateFormatter.dateFromString(self.race!.startTime!)
         dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
@@ -38,6 +36,7 @@ class RaceController: UIViewController {
         
         self.starttijdLabel.text = "Start time\n\(startTimeAsString)"
         
+        // Toont eventueel de eindtijd in het goede formaat
         if (self.race!.endTime != nil) {
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'.000Z'"
             let endTimeAsDate = dateFormatter.dateFromString(self.race!.endTime!)
@@ -51,6 +50,7 @@ class RaceController: UIViewController {
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
+        // Zorgt ervoor dat lege rijen niet worden getoond
         var backgroundView = UIView(frame: CGRectZero)
         self.tableView.tableFooterView = backgroundView
         self.tableView.backgroundColor = UIColor.clearColor()
@@ -72,7 +72,8 @@ class RaceController: UIViewController {
         var waypointCell: WaypointCell = self.tableView.dequeueReusableCellWithIdentifier("waypointCell") as! WaypointCell
         waypointCell.naam.text = self.race!.waypoints[indexPath.row].name
         
-        let visitedWaypoints = self.defaults.arrayForKey("visitedWaypoints") as! [String]
+        // Toont per waypoint de status
+        let visitedWaypoints = MyVariables.defaults.arrayForKey("visitedWaypoints") as! [String]
         if (find(visitedWaypoints, self.race!.waypoints[indexPath.row].id!) == nil) {
             waypointCell.vinkje.hidden = true
         }
@@ -82,6 +83,7 @@ class RaceController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "toWaypoint") {
+            // Toont info van de waypoint
             let indexPath = self.tableView.indexPathForSelectedRow()
             let waypoint: Waypoint = race!.waypoints[indexPath!.row]
             let waypointController = segue.destinationViewController as! WaypointController
@@ -91,27 +93,33 @@ class RaceController: UIViewController {
     }
 
     @IBAction func inchecken(sender: UIButton) {
+        // Vraagt toestemming voor toegang tot de locatie
         locManager.requestWhenInUseAuthorization()
         
         if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse) {
+            
+            // Bepaalt de locatie
             locManager.startUpdatingLocation()
+            
             if (locManager.location != nil) {
                 let currentLocation = locManager.location
             
                 let raceID: String = self.race!.id!
                 let lat = currentLocation.coordinate.latitude
                 let long = currentLocation.coordinate.longitude
-                let authKey: String? = defaults.stringForKey("authKey")
+                let authKey: String? = MyVariables.defaults.stringForKey("authKey")
             
-                let url = NSURL(string: "\(restRace)races/\(raceID)/location/\(lat)/\(long)?apikey=\(authKey!)")!
+                let url = NSURL(string: "\(MyVariables.restRace)races/\(raceID)/location/\(lat)/\(long)?apikey=\(authKey!)")!
                 var request = NSMutableURLRequest(URL: url)
                 request.addValue("application/json", forHTTPHeaderField: "Accept")
             
                 request.HTTPMethod = "PUT"
             
+                // Request
                 NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
                     (response, data, error) in
                 
+                    // Parse JSON
                     var parseError: NSError?
                     let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
                         options: NSJSONReadingOptions.AllowFragments,
@@ -121,13 +129,14 @@ class RaceController: UIViewController {
                 }
             }
             else {
+                // Toont een melding als er geen locatie is gevonden
                 var refreshAlert = UIAlertController(title: "Mislukt", message: "Er is geen locatie gevonden.", preferredStyle: UIAlertControllerStyle.Alert)
                 refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
                 presentViewController(refreshAlert, animated: true, completion: nil)
             }
         }
         else if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.Denied) {
-            
+            // Toont de melding als de app geen toegang heeft tot de locatie
             let alert = UIAlertController(title: "Geen toegang tot locatie", message: "Om in te kunnen checken heeft de app toegang nodig tot de locatie. U kunt setttings openen om de toegang te wijzigen.", preferredStyle: .Alert)
             
             let cancelActie = UIAlertAction(title: "Sluiten", style: .Cancel, handler: nil)
@@ -135,6 +144,7 @@ class RaceController: UIViewController {
             
             let openActie = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
                 if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+                    // Opent settings
                     UIApplication.sharedApplication().openURL(url)
                 }
                 
@@ -148,32 +158,25 @@ class RaceController: UIViewController {
     func response(result: NSDictionary) {
         if (result["checkedIn"] as? Bool == true) {
             
+            // Verzamelt de visited waypoints van de gebruiker en slaat deze op
             var visitedWaypointsArray: [String] = []
             for visitedWaypoint in result["locations"] as! NSArray {
                 let waypoint = visitedWaypoint as! NSDictionary
                 visitedWaypointsArray.append(visitedWaypoint["location"] as! String)
             }
-            defaults.setObject(visitedWaypointsArray, forKey: "visitedWaypoints")
+            MyVariables.defaults.setObject(visitedWaypointsArray, forKey: "visitedWaypoints")
             
+            // Geeft een melding als de gebruiker is ingecheckt
             var refreshAlert = UIAlertController(title: "Ingecheckt", message: "U bent dicht genoeg bij een waypoint en bent ingecheckt.", preferredStyle: UIAlertControllerStyle.Alert)
             refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
             presentViewController(refreshAlert, animated: true, completion: nil)
         }
         else {
+            // Geeft een melding als de gebruiker niet is ingecheckt
             var refreshAlert = UIAlertController(title: "Niet ingecheckt", message: "U bent niet dicht genoeg bij een waypoint en bent daarom niet ingecheckt.", preferredStyle: UIAlertControllerStyle.Alert)
             refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
             presentViewController(refreshAlert, animated: true, completion: nil)
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

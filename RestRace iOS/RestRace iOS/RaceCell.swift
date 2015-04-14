@@ -2,8 +2,8 @@
 //  RaceCell.swift
 //  RestRace iOS
 //
-//  Created by User on 04/04/15.
-//  Copyright (c) 2015 User. All rights reserved.
+//  Created by Jip Verhoeven on 04/04/15.
+//  Copyright (c) 2015 Jip Verhoeven. All rights reserved.
 //
 
 import UIKit

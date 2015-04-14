@@ -2,16 +2,14 @@
 //  InloggenController.swift
 //  RestRace iOS
 //
-//  Created by User on 06/04/15.
-//  Copyright (c) 2015 User. All rights reserved.
+//  Created by Jip Verhoeven on 06/04/15.
+//  Copyright (c) 2015 Jip Verhoeven. All rights reserved.
 //
 
 import UIKit
+import Foundation
 
 class InloggenController: UIViewController {
-
-    let restRace: String = "https://restrace2.herokuapp.com/"
-    let defaults = NSUserDefaults.standardUserDefaults()
     
     @IBOutlet weak var emailadresTextField: UITextField!
     @IBOutlet weak var wachtwoordTextField: UITextField!
@@ -25,20 +23,22 @@ class InloggenController: UIViewController {
     }
     
     @IBAction func inloggen(sender: UIButton) {
-        if (!emailadresTextField.text.isEmpty && !wachtwoordTextField.text.isEmpty) {
-            let url = NSURL(string: "\(restRace)login")!
+        if (!self.emailadresTextField.text.isEmpty && !self.wachtwoordTextField.text.isEmpty) {
+            let url = NSURL(string: "\(MyVariables.restRace)login")!
             var request = NSMutableURLRequest(URL: url)
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
             request.HTTPMethod = "POST"
         
-            let jsonString = "{\"email\":\"\(emailadresTextField.text)\",\"password\":\"\(wachtwoordTextField.text)\"}"
+            let jsonString = "{\"email\":\"\(self.emailadresTextField.text)\",\"password\":\"\(self.wachtwoordTextField.text)\"}"
             request.HTTPBody = jsonString.dataUsingEncoding(NSUTF8StringEncoding)
         
+            // Request
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
                 (response, data, error) in
             
+                // Parse JSON
                 var parseError: NSError?
                 let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
                     options: NSJSONReadingOptions.AllowFragments,
@@ -51,21 +51,24 @@ class InloggenController: UIViewController {
     
     func getUserFromJSON(user: NSDictionary) {
         if (user["authKey"] as? String != nil) {
+            // Verzamelt de visited waypoints van de ingelogde op
             var visitedWaypointsArray: [String] = []
             for visitedWaypoint in user["visitedLocations"] as! NSArray {
                 let waypoint = visitedWaypoint as! NSDictionary
                 visitedWaypointsArray.append(visitedWaypoint["location"] as! String)
             }
             
-            defaults.setObject(user["authKey"] as! String, forKey: "authKey")
-            defaults.setObject(user["nickname"] as? String, forKey: "nickname")
-            defaults.setObject(visitedWaypointsArray, forKey: "visitedWaypoints")
+            // Slaat de gegevens van de ingelogde gebruiker op
+            MyVariables.defaults.setObject(user["authKey"] as! String, forKey: "authKey")
+            MyVariables.defaults.setObject(user["nickname"] as? String, forKey: "nickname")
+            MyVariables.defaults.setObject(visitedWaypointsArray, forKey: "visitedWaypoints")
             
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         else {
-            wachtwoordTextField.text = ""
+            self.wachtwoordTextField.text = ""
 
+            // Toont melding als het inloggen is mislukt
             var refreshAlert = UIAlertController(title: "Mislukt", message: "Het inloggen is mislukt.\nProbeer het opnieuw.", preferredStyle: UIAlertControllerStyle.Alert)
             refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
             presentViewController(refreshAlert, animated: true, completion: nil)
@@ -75,15 +78,5 @@ class InloggenController: UIViewController {
     @IBAction func onTapMainView(sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

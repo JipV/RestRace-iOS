@@ -2,19 +2,16 @@
 //  RacesController.swift
 //  RestRace iOS
 //
-//  Created by User on 03/04/15.
-//  Copyright (c) 2015 User. All rights reserved.
+//  Created by Jip Verhoeven on 03/04/15.
+//  Copyright (c) 2015 Jip Verhoeven. All rights reserved.
 //
 
 import UIKit
 
 class RacesController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
-    
-    let restRace: String = "https://restrace2.herokuapp.com/"
-    let defaults = NSUserDefaults.standardUserDefaults()
-    
+
     var racesData: [Race] = []
     
     let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
@@ -22,22 +19,26 @@ class RacesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let authKey: String? = defaults.stringForKey("authKey")
+        // Toont inlogscherm als de gebruiker niet is ingelogd
+        let authKey: String? = MyVariables.defaults.stringForKey("authKey")
         if (authKey == nil) {
             self.performSegueWithIdentifier("toLogin", sender: self)
         }
         
+        // Voegt een activity indicator toe aan de view
         activityIndicator.frame = CGRectMake(100, 100, 100, 100);
         self.view.addSubview(activityIndicator)
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
+        // Zorgt ervoor dat lege rijen niet worden getoond
         var backgroundView = UIView(frame: CGRectZero)
         self.tableView.tableFooterView = backgroundView
         self.tableView.backgroundColor = UIColor.clearColor()
     }
     
     override func viewDidAppear(animated: Bool) {
+        // Haalt de gegevens opniew op en refresht de tableview
         self.racesData = []
         refreshTableView()
         getRacesData()
@@ -50,27 +51,30 @@ class RacesController: UIViewController {
     @IBAction func uitloggen(sender: UIButton) {
         self.racesData = []
         refreshTableView()
+
+        // Gooit de opgeslagen gegevens van de gebruiker leeg
+        MyVariables.defaults.setObject(nil, forKey: "authKey")
+        MyVariables.defaults.setObject(nil, forKey: "nickname")
+        MyVariables.defaults.setObject(nil, forKey: "visitedWaypoints")
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(nil, forKey: "authKey")
-        defaults.setObject(nil, forKey: "nickname")
-        defaults.setObject(nil, forKey: "visitedWaypoints")
-        
+        // Toont inlogscherm
         self.performSegueWithIdentifier("toLogin", sender: self)
     }
     
     func getRacesData() {
-        let authKey: String? = defaults.stringForKey("authKey")
+        let authKey: String? = MyVariables.defaults.stringForKey("authKey")
         if (authKey != nil) {
             activityIndicator.startAnimating()
             
-            let url = NSURL(string: "\(self.restRace)races?apikey=\(authKey!)&type=participant&pageSize=100")!
+            let url = NSURL(string: "\(MyVariables.restRace)races?apikey=\(authKey!)&type=participant&pageSize=100")!
             var request = NSMutableURLRequest(URL: url)
             request.addValue("application/json", forHTTPHeaderField: "Accept")
         
+            // Request
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
                 (response, data, error) in
             
+                // Parse JSON
                 var parseError: NSError?
                 let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
                     options: NSJSONReadingOptions.AllowFragments,
@@ -84,16 +88,19 @@ class RacesController: UIViewController {
     func getRacesDataFromJSON(races: NSArray) {
         for race in races {
             
+            // Verzamelt id's van de owners
             var ownersArray: [String] = []
             for owner in race["owners"] as! NSArray {
                 ownersArray.append(owner["_id"] as! NSString as String)
             }
-                
+            
+            // Verzamelt id's van de pariticipants
             var participantsArray: [String] = []
             for participant in race["participants"] as! NSArray {
                 participantsArray.append(participant["_id"] as! NSString as String)
             }
-                
+            
+            // Verzamelt de informatie van de waypoints
             var waypointsArray: [Waypoint] = []
             for waypoint in race["locations"] as! NSArray {
                 let location = waypoint["location"] as! NSDictionary
@@ -108,6 +115,7 @@ class RacesController: UIViewController {
                 waypointsArray.append(newWaypoint)
             }
             
+            // Verzamelt de informatie van een race
             let newRace = Race(
                 id: race["_id"] as! String,
                 name: race["name"] as! String,
@@ -128,6 +136,7 @@ class RacesController: UIViewController {
         
         if editingStyle == UITableViewCellEditingStyle.Delete {
             
+            // Geeft een melding als de gebruiker een race wilt verwijderen
             let alert = UIAlertController(title: "Race verwijderen", message: "Weet u zeker dat u de race wilt verwijderen? U bent dan geen deelnemer meer van de race.", preferredStyle: .Alert)
             
             let neeActie = UIAlertAction(title: "Nee", style: .Cancel, handler: nil)
@@ -136,23 +145,26 @@ class RacesController: UIViewController {
             let jaActie = UIAlertAction(title: "Ja", style: .Default) { (action) in
                 
                 let raceID: String = self.racesData[indexPath.row].id!
-                let authKey: String? = self.defaults.stringForKey("authKey")
+                let authKey: String? = MyVariables.defaults.stringForKey("authKey")
                 
-                let url = NSURL(string: "\(self.restRace)races/\(raceID)/participant?apikey=\(authKey!)")!
+                let url = NSURL(string: "\(MyVariables.restRace)races/\(raceID)/participant?apikey=\(authKey!)")!
                 var request = NSMutableURLRequest(URL: url)
                 request.addValue("application/json", forHTTPHeaderField: "Accept")
                 
                 request.HTTPMethod = "DELETE"
                 
+                // Request
                 NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
                     (response, data, error) in
                     
                     let response = response as! NSHTTPURLResponse
                     if (response.statusCode == 200) {
+                        // Verwijdert de race uit de tableview
                         self.racesData.removeAtIndex(indexPath.row)
                         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                     }
                     else {
+                        // Geeft een melding als het verwijderen van de race is mislukt
                         var refreshAlert = UIAlertController(title: "Mislukt", message: "Het verwijderen van de race is mislukt.", preferredStyle: UIAlertControllerStyle.Alert)
                         refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
                         self.presentViewController(refreshAlert, animated: true, completion: nil)
@@ -166,6 +178,7 @@ class RacesController: UIViewController {
     }
     
     func refreshTableView() {
+        // Vernieuwt de data in de tableview
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
             return
@@ -176,6 +189,7 @@ class RacesController: UIViewController {
         var label = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
         if (self.racesData.count == 0) {
             
+            // Toont bericht als er geen races zijn waar de ingelogde gebruiker aan deelneemt
             label.text = "Er zijn geen races waar u aan deelneemt."
             label.textAlignment = NSTextAlignment.Center
             label.numberOfLines = 0
@@ -194,8 +208,9 @@ class RacesController: UIViewController {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var raceCell: RaceCell = self.tableView.dequeueReusableCellWithIdentifier("raceCell") as! RaceCell
         
-        let visitedWaypoints = self.defaults.arrayForKey("visitedWaypoints") as! [String]
+        let visitedWaypoints = MyVariables.defaults.arrayForKey("visitedWaypoints") as! [String]
         
+        // Bepaalt de status van een race
         var aantalVisitedWaypoints: Int = 0
         for waypoint in self.racesData[indexPath.row].waypoints {
             if (find(visitedWaypoints, waypoint.id!) != nil) {
@@ -203,6 +218,7 @@ class RacesController: UIViewController {
             }
         }
         
+        // Toont de status van een race
         if (aantalVisitedWaypoints < self.racesData[indexPath.row].waypoints.count) {
             raceCell.vinkje.hidden = true
         }
@@ -215,6 +231,7 @@ class RacesController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "toRace") {
+            // Toont de info van een race
             let indexPath = self.tableView.indexPathForSelectedRow()
             let race: Race = racesData[indexPath!.row]
             let raceController = segue.destinationViewController as! RaceController
@@ -222,15 +239,5 @@ class RacesController: UIViewController {
             raceController.hidesBottomBarWhenPushed = true;
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

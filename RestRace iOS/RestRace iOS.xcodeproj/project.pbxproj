@@ -22,6 +22,7 @@
 		CE835FA71AD01CE000B23F95 /* RaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE835FA61AD01CE000B23F95 /* RaceCell.swift */; };
 		CE9407FE1AD6FAC300E5299A /* WaypointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9407FD1AD6FAC300E5299A /* WaypointCell.swift */; };
 		EC3E364A1AD7C8B3004B98C6 /* WaypointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3E36491AD7C8B3004B98C6 /* WaypointController.swift */; };
+		ECB0F6481ADD047A000FDB1D /* MyVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0F6471ADD047A000FDB1D /* MyVariables.swift */; };
 		ECE2B0B71AD80C8600039BF0 /* DeelnemenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2B0B61AD80C8600039BF0 /* DeelnemenController.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		CE835FA61AD01CE000B23F95 /* RaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceCell.swift; sourceTree = "<group>"; };
 		CE9407FD1AD6FAC300E5299A /* WaypointCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointCell.swift; sourceTree = "<group>"; };
 		EC3E36491AD7C8B3004B98C6 /* WaypointController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointController.swift; sourceTree = "<group>"; };
+		ECB0F6471ADD047A000FDB1D /* MyVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVariables.swift; sourceTree = "<group>"; };
 		ECE2B0B61AD80C8600039BF0 /* DeelnemenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeelnemenController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +148,7 @@
 		CE7BC93D1ADC4E4000EA6471 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				ECB0F6471ADD047A000FDB1D /* MyVariables.swift */,
 				CE00F97A1AD2741A001736A6 /* Waypoint.swift */,
 				CE00F9761AD164C3001736A6 /* Race.swift */,
 			);
@@ -211,7 +214,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = User;
+				ORGANIZATIONNAME = "Jip Verhoeven";
 				TargetAttributes = {
 					CE37F43C1ACEC0130082DA09 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -271,6 +274,7 @@
 				CE1BB0DF1AD6A67100FACA4D /* RaceController.swift in Sources */,
 				CE77E7FC1AD312B20048D1AF /* InloggenController.swift in Sources */,
 				CE0984B81AD2C93E002D9DF0 /* ProfielController.swift in Sources */,
+				ECB0F6481ADD047A000FDB1D /* MyVariables.swift in Sources */,
 				CE00F97B1AD2741A001736A6 /* Waypoint.swift in Sources */,
 				CE37F4431ACEC0130082DA09 /* AppDelegate.swift in Sources */,
 				CE37F4631ACEE5A30082DA09 /* RacesController.swift in Sources */,
