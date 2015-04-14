@@ -23,29 +23,37 @@ class InloggenController: UIViewController {
     }
     
     @IBAction func inloggen(sender: UIButton) {
-        if (!self.emailadresTextField.text.isEmpty && !self.wachtwoordTextField.text.isEmpty) {
-            let url = NSURL(string: "\(MyVariables.restRace)login")!
-            var request = NSMutableURLRequest(URL: url)
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        if (Reachability.isConnectedToNetwork()) {
+            if (!self.emailadresTextField.text.isEmpty && !self.wachtwoordTextField.text.isEmpty) {
+                let url = NSURL(string: "\(MyVariables.restRace)login")!
+                var request = NSMutableURLRequest(URL: url)
+                request.addValue("application/json", forHTTPHeaderField: "Accept")
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-            request.HTTPMethod = "POST"
+                request.HTTPMethod = "POST"
         
-            let jsonString = "{\"email\":\"\(self.emailadresTextField.text)\",\"password\":\"\(self.wachtwoordTextField.text)\"}"
-            request.HTTPBody = jsonString.dataUsingEncoding(NSUTF8StringEncoding)
+                let jsonString = "{\"email\":\"\(self.emailadresTextField.text)\",\"password\":\"\(self.wachtwoordTextField.text)\"}"
+                request.HTTPBody = jsonString.dataUsingEncoding(NSUTF8StringEncoding)
         
-            // Request
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-                (response, data, error) in
+                // Request
+                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+                    (response, data, error) in
             
-                // Parse JSON
-                var parseError: NSError?
-                let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
-                    options: NSJSONReadingOptions.AllowFragments,
-                    error:&parseError)
+                    // Parse JSON
+                    var parseError: NSError?
+                    let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
+                        options: NSJSONReadingOptions.AllowFragments,
+                        error:&parseError)
             
-                self.getUserFromJSON(parsedObject as! NSDictionary)
+                    self.getUserFromJSON(parsedObject as! NSDictionary)
+                }
             }
+        }
+        else {
+            // Toont melding als er geen internet verbinding is
+            var refreshAlert = UIAlertController(title: "Geen internetverbinding", message: "Er is geen internet verbinding.", preferredStyle: UIAlertControllerStyle.Alert)
+            refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
+            self.presentViewController(refreshAlert, animated: true, completion: nil)
         }
     }
     

@@ -62,26 +62,34 @@ class RacesController: UIViewController {
     }
     
     func getRacesData() {
-        let authKey: String? = MyVariables.defaults.stringForKey("authKey")
-        if (authKey != nil) {
-            activityIndicator.startAnimating()
+        if (Reachability.isConnectedToNetwork()) {
+            let authKey: String? = MyVariables.defaults.stringForKey("authKey")
+            if (authKey != nil) {
+                activityIndicator.startAnimating()
             
-            let url = NSURL(string: "\(MyVariables.restRace)races?apikey=\(authKey!)&type=participant&pageSize=100")!
-            var request = NSMutableURLRequest(URL: url)
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
+                let url = NSURL(string: "\(MyVariables.restRace)races?apikey=\(authKey!)&type=participant&pageSize=100")!
+                var request = NSMutableURLRequest(URL: url)
+                request.addValue("application/json", forHTTPHeaderField: "Accept")
         
-            // Request
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-                (response, data, error) in
+                // Request
+                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+                    (response, data, error) in
             
-                // Parse JSON
-                var parseError: NSError?
-                let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
-                    options: NSJSONReadingOptions.AllowFragments,
-                    error:&parseError)
+                    // Parse JSON
+                    var parseError: NSError?
+                    let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
+                        options: NSJSONReadingOptions.AllowFragments,
+                        error:&parseError)
             
-                self.getRacesDataFromJSON(parsedObject as! NSArray)
+                    self.getRacesDataFromJSON(parsedObject as! NSArray)
+                }
             }
+        }
+        else {
+            // Toont melding als er geen internet verbinding is
+            var refreshAlert = UIAlertController(title: "Geen internetverbinding", message: "Er is geen internet verbinding.", preferredStyle: UIAlertControllerStyle.Alert)
+            refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
+            presentViewController(refreshAlert, animated: true, completion: nil)
         }
     }
     
@@ -105,7 +113,7 @@ class RacesController: UIViewController {
             for waypoint in race["locations"] as! NSArray {
                 let location = waypoint["location"] as! NSDictionary
                 let newWaypoint = Waypoint(
-                    id: waypoint["_id"] as! String,
+                    id: location["_id"] as! String,
                     name: location["name"] as! String,
                     description: location["description"] as? String,
                     lat: location["lat"] as! Double,
@@ -144,31 +152,39 @@ class RacesController: UIViewController {
             
             let jaActie = UIAlertAction(title: "Ja", style: .Default) { (action) in
                 
-                let raceID: String = self.racesData[indexPath.row].id!
-                let authKey: String? = MyVariables.defaults.stringForKey("authKey")
+                if (Reachability.isConnectedToNetwork()) {
+                    let raceID: String = self.racesData[indexPath.row].id!
+                    let authKey: String? = MyVariables.defaults.stringForKey("authKey")
                 
-                let url = NSURL(string: "\(MyVariables.restRace)races/\(raceID)/participant?apikey=\(authKey!)")!
-                var request = NSMutableURLRequest(URL: url)
-                request.addValue("application/json", forHTTPHeaderField: "Accept")
+                    let url = NSURL(string: "\(MyVariables.restRace)races/\(raceID)/participant?apikey=\(authKey!)")!
+                    var request = NSMutableURLRequest(URL: url)
+                    request.addValue("application/json", forHTTPHeaderField: "Accept")
                 
-                request.HTTPMethod = "DELETE"
+                    request.HTTPMethod = "DELETE"
                 
-                // Request
-                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-                    (response, data, error) in
+                    // Request
+                    NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+                        (response, data, error) in
                     
-                    let response = response as! NSHTTPURLResponse
-                    if (response.statusCode == 200) {
-                        // Verwijdert de race uit de tableview
-                        self.racesData.removeAtIndex(indexPath.row)
-                        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                        let response = response as! NSHTTPURLResponse
+                        if (response.statusCode == 200) {
+                            // Verwijdert de race uit de tableview
+                            self.racesData.removeAtIndex(indexPath.row)
+                            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                        }
+                        else {
+                            // Geeft een melding als het verwijderen van de race is mislukt
+                            var refreshAlert = UIAlertController(title: "Mislukt", message: "Het verwijderen van de race is mislukt.", preferredStyle: UIAlertControllerStyle.Alert)
+                            refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
+                            self.presentViewController(refreshAlert, animated: true, completion: nil)
+                        }
                     }
-                    else {
-                        // Geeft een melding als het verwijderen van de race is mislukt
-                        var refreshAlert = UIAlertController(title: "Mislukt", message: "Het verwijderen van de race is mislukt.", preferredStyle: UIAlertControllerStyle.Alert)
-                        refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
-                        self.presentViewController(refreshAlert, animated: true, completion: nil)
-                    }
+                }
+                else {
+                    // Toont melding als er geen internet verbinding is
+                    var refreshAlert = UIAlertController(title: "Geen internetverbinding", message: "Er is geen internet verbinding.", preferredStyle: UIAlertControllerStyle.Alert)
+                    refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
+                    self.presentViewController(refreshAlert, animated: true, completion: nil)
                 }
             }
             alert.addAction(jaActie)

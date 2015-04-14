@@ -104,28 +104,36 @@ class RaceController: UIViewController {
             if (locManager.location != nil) {
                 let currentLocation = locManager.location
             
-                let raceID: String = self.race!.id!
-                let lat = currentLocation.coordinate.latitude
-                let long = currentLocation.coordinate.longitude
-                let authKey: String? = MyVariables.defaults.stringForKey("authKey")
+                if (Reachability.isConnectedToNetwork()) {
+                    let raceID: String = self.race!.id!
+                    let lat = currentLocation.coordinate.latitude
+                    let long = currentLocation.coordinate.longitude
+                    let authKey: String? = MyVariables.defaults.stringForKey("authKey")
             
-                let url = NSURL(string: "\(MyVariables.restRace)races/\(raceID)/location/\(lat)/\(long)?apikey=\(authKey!)")!
-                var request = NSMutableURLRequest(URL: url)
-                request.addValue("application/json", forHTTPHeaderField: "Accept")
+                    let url = NSURL(string: "\(MyVariables.restRace)races/\(raceID)/location/\(lat)/\(long)?apikey=\(authKey!)")!
+                    var request = NSMutableURLRequest(URL: url)
+                    request.addValue("application/json", forHTTPHeaderField: "Accept")
             
-                request.HTTPMethod = "PUT"
+                    request.HTTPMethod = "PUT"
             
-                // Request
-                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-                    (response, data, error) in
+                    // Request
+                    NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+                        (response, data, error) in
                 
-                    // Parse JSON
-                    var parseError: NSError?
-                    let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
-                        options: NSJSONReadingOptions.AllowFragments,
-                        error:&parseError)
+                        // Parse JSON
+                        var parseError: NSError?
+                        let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
+                            options: NSJSONReadingOptions.AllowFragments,
+                            error:&parseError)
                     
-                    self.response(parsedObject as! NSDictionary)
+                        self.response(parsedObject as! NSDictionary)
+                    }
+                }
+                else {
+                    // Toont melding als er geen internet verbinding is
+                    var refreshAlert = UIAlertController(title: "Geen internetverbinding", message: "Er is geen internet verbinding.", preferredStyle: UIAlertControllerStyle.Alert)
+                    refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
+                    self.presentViewController(refreshAlert, animated: true, completion: nil)
                 }
             }
             else {

@@ -21,23 +21,31 @@ class DeelnemenController: UIViewController {
     }
 
     @IBAction func deelnemenAanRace(sender: UIButton) {
-        if (!self.codeTextField.text.isEmpty) {
+        if (Reachability.isConnectedToNetwork()) {
+            if (!self.codeTextField.text.isEmpty) {
             
-            let raceID: String = self.codeTextField.text
-            let authKey: String? = MyVariables.defaults.stringForKey("authKey")
+                let raceID: String = self.codeTextField.text
+                let authKey: String? = MyVariables.defaults.stringForKey("authKey")
             
-            let url = NSURL(string: "\(MyVariables.restRace)races/\(raceID)/participant?apikey=\(authKey!)")!
-            var request = NSMutableURLRequest(URL: url)
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
+                let url = NSURL(string: "\(MyVariables.restRace)races/\(raceID)/participant?apikey=\(authKey!)")!
+                var request = NSMutableURLRequest(URL: url)
+                request.addValue("application/json", forHTTPHeaderField: "Accept")
             
-            request.HTTPMethod = "PUT"
+                request.HTTPMethod = "PUT"
             
-            // Request
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-                (response, data, error) in
+                // Request
+                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+                    (response, data, error) in
         
-                self.response(response as! NSHTTPURLResponse)
+                    self.response(response as! NSHTTPURLResponse)
+                }
             }
+        }
+        else {
+            // Toont melding als er geen internet verbinding is
+            var refreshAlert = UIAlertController(title: "Geen internetverbinding", message: "Er is geen internet verbinding.", preferredStyle: UIAlertControllerStyle.Alert)
+            refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
+            self.presentViewController(refreshAlert, animated: true, completion: nil)
         }
     }
     
@@ -50,7 +58,7 @@ class DeelnemenController: UIViewController {
             // Geeft melding dat het deelnemen aan de race is mislukt
             var refreshAlert = UIAlertController(title: "Mislukt", message: "Het deelnemen aan de race is mislukt.\nProbeer het opnieuw.", preferredStyle: UIAlertControllerStyle.Alert)
             refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
-            presentViewController(refreshAlert, animated: true, completion: nil)  
+            self.presentViewController(refreshAlert, animated: true, completion: nil)
         }
     }
     

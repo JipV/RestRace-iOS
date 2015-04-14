@@ -23,6 +23,7 @@
 		CE9407FE1AD6FAC300E5299A /* WaypointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9407FD1AD6FAC300E5299A /* WaypointCell.swift */; };
 		EC3E364A1AD7C8B3004B98C6 /* WaypointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3E36491AD7C8B3004B98C6 /* WaypointController.swift */; };
 		ECB0F6481ADD047A000FDB1D /* MyVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0F6471ADD047A000FDB1D /* MyVariables.swift */; };
+		ECC9F4F91ADD1B8900FBAB27 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC9F4F81ADD1B8900FBAB27 /* Reachability.swift */; };
 		ECE2B0B71AD80C8600039BF0 /* DeelnemenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2B0B61AD80C8600039BF0 /* DeelnemenController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		CE9407FD1AD6FAC300E5299A /* WaypointCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointCell.swift; sourceTree = "<group>"; };
 		EC3E36491AD7C8B3004B98C6 /* WaypointController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointController.swift; sourceTree = "<group>"; };
 		ECB0F6471ADD047A000FDB1D /* MyVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVariables.swift; sourceTree = "<group>"; };
+		ECC9F4F81ADD1B8900FBAB27 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		ECE2B0B61AD80C8600039BF0 /* DeelnemenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeelnemenController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +153,7 @@
 				ECB0F6471ADD047A000FDB1D /* MyVariables.swift */,
 				CE00F97A1AD2741A001736A6 /* Waypoint.swift */,
 				CE00F9761AD164C3001736A6 /* Race.swift */,
+				ECC9F4F81ADD1B8900FBAB27 /* Reachability.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECC9F4F91ADD1B8900FBAB27 /* Reachability.swift in Sources */,
 				CE9407FE1AD6FAC300E5299A /* WaypointCell.swift in Sources */,
 				CE835FA71AD01CE000B23F95 /* RaceCell.swift in Sources */,
 				CE1BB0DF1AD6A67100FACA4D /* RaceController.swift in Sources */,

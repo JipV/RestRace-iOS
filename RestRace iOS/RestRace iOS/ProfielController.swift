@@ -34,23 +34,31 @@ class ProfielController: UIViewController {
     }
     
     @IBAction func wijzigenNickname(sender: UIButton) {
-        let authKey: String? = MyVariables.defaults.stringForKey("authKey")
+        if (Reachability.isConnectedToNetwork()) {
+            let authKey: String? = MyVariables.defaults.stringForKey("authKey")
             
-        let url = NSURL(string: "\(MyVariables.restRace)users/nickname?apikey=\(authKey!)")!
-        var request = NSMutableURLRequest(URL: url)
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            let url = NSURL(string: "\(MyVariables.restRace)users/nickname?apikey=\(authKey!)")!
+            var request = NSMutableURLRequest(URL: url)
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             
-        request.HTTPMethod = "PUT"
+            request.HTTPMethod = "PUT"
             
-        let jsonString = "{\"nickname\":\"\(nicknameTextField.text)\"}"
-        request.HTTPBody = jsonString.dataUsingEncoding(NSUTF8StringEncoding)
+            let jsonString = "{\"nickname\":\"\(nicknameTextField.text)\"}"
+            request.HTTPBody = jsonString.dataUsingEncoding(NSUTF8StringEncoding)
         
-        // Request
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-            (response, data, error) in
+            // Request
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+                (response, data, error) in
                 
-            self.response(response as! NSHTTPURLResponse)
+                self.response(response as! NSHTTPURLResponse)
+            }
+        }
+        else {
+            // Toont melding als er geen internet verbinding is
+            var refreshAlert = UIAlertController(title: "Geen internetverbinding", message: "Er is geen internet verbinding.", preferredStyle: UIAlertControllerStyle.Alert)
+            refreshAlert.addAction(UIAlertAction(title: "Sluiten", style: UIAlertActionStyle.Cancel) { UIAlertAction in })
+            self.presentViewController(refreshAlert, animated: true, completion: nil)
         }
     }
     
