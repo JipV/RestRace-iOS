@@ -26,7 +26,7 @@ class ProfielController: UIViewController {
             self.nicknameTextField.text = defaults.stringForKey("nickname")
         }
         else {
-            self.nicknameLabel.text = "(Geen nickname ingesteld)"
+            self.nicknameLabel.text = "(Geen nickname)"
             self.nicknameTextField.text = ""
         }
     }

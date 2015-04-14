@@ -173,6 +173,17 @@ class RacesController: UIViewController {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var label = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+        if (self.racesData.count == 0) {
+            
+            label.text = "Er zijn geen races waar u aan deelneemt."
+            label.textAlignment = NSTextAlignment.Center
+            label.numberOfLines = 0
+            self.tableView.backgroundView = label
+            
+            return 0
+        }
+        self.tableView.backgroundView = nil
         return self.racesData.count
     }
     
